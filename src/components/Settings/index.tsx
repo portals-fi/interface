@@ -12,11 +12,9 @@ import styled, { ThemeContext } from 'styled-components/macro'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 import { useModalOpen, useToggleSettingsMenu } from '../../state/application/hooks'
 import { ApplicationModal } from '../../state/application/reducer'
-import { useClientSideRouter, useExpertModeManager } from '../../state/user/hooks'
+import { useClientSideRouter } from '../../state/user/hooks'
 import { ThemedText } from '../../theme'
-import { ButtonError } from '../Button'
 import { AutoColumn } from '../Column'
-import Modal from '../Modal'
 import QuestionHelper from '../QuestionHelper'
 import { RowBetween, RowFixed } from '../Row'
 import Toggle from '../Toggle'
@@ -127,7 +125,7 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
 
   const theme = useContext(ThemeContext)
 
-  const [expertMode, toggleExpertMode] = useExpertModeManager()
+  // const [expertMode, toggleExpertMode] = useExpertModeManager()
 
   const [clientSideRouter, setClientSideRouter] = useClientSideRouter()
 
@@ -139,7 +137,7 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
   return (
     // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/30451
     <StyledMenu ref={node as any}>
-      <Modal isOpen={showConfirmation} onDismiss={() => setShowConfirmation(false)} maxHeight={100}>
+      {/* <Modal isOpen={showConfirmation} onDismiss={() => setShowConfirmation(false)} maxHeight={100}>
         <ModalContentWrapper>
           <AutoColumn gap="lg">
             <RowBetween style={{ padding: '0 2rem' }}>
@@ -178,16 +176,16 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
             </AutoColumn>
           </AutoColumn>
         </ModalContentWrapper>
-      </Modal>
+      </Modal> */}
       <StyledMenuButton onClick={toggle} id="open-settings-dialog-button" aria-label={t`Transaction Settings`}>
         <StyledMenuIcon />
-        {expertMode ? (
+        {/* {expertMode ? (
           <EmojiWrapper>
             <span role="img" aria-label="wizard-icon">
               🧙
             </span>
           </EmojiWrapper>
-        ) : null}
+        ) : null} */}
       </StyledMenuButton>
       {open && (
         <MenuFlyout>
@@ -220,7 +218,7 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
                 />
               </RowBetween>
             )}
-            <RowBetween>
+            {/* <RowBetween>
               <RowFixed>
                 <ThemedText.Black fontWeight={400} fontSize={14} color={theme.text2}>
                   <Trans>Expert Mode</Trans>
@@ -246,7 +244,7 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
                       }
                 }
               />
-            </RowBetween>
+            </RowBetween> */}
           </AutoColumn>
         </MenuFlyout>
       )}

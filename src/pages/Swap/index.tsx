@@ -29,7 +29,7 @@ import Loader from '../../components/Loader'
 import { AutoRow } from '../../components/Row'
 import confirmPriceImpactWithoutFee from '../../components/swap/confirmPriceImpactWithoutFee'
 import ConfirmSwapModal from '../../components/swap/ConfirmSwapModal'
-import { ArrowWrapper, SwapCallbackError, Wrapper } from '../../components/swap/styleds'
+import { ArrowWrapper, Wrapper } from '../../components/swap/styleds'
 import SwapHeader from '../../components/swap/SwapHeader'
 import { SwitchLocaleLink } from '../../components/SwitchLocaleLink'
 import TokenWarningModal from '../../components/TokenWarningModal'
@@ -50,7 +50,6 @@ import {
   useSwapActionHandlers,
   useSwapState,
 } from '../../state/swap/hooks'
-import { useExpertModeManager } from '../../state/user/hooks'
 import { LinkStyledButton, ThemedText } from '../../theme'
 import { computeFiatValuePriceImpact } from '../../utils/computeFiatValuePriceImpact'
 import { maxAmountSpend } from '../../utils/maxAmountSpend'
@@ -106,9 +105,6 @@ export default function Swap({ history }: RouteComponentProps) {
 
   // toggle wallet when disconnected
   const toggleWalletModal = useWalletModalToggle()
-
-  // for expert mode
-  const [isExpertMode] = useExpertModeManager()
 
   // swap state
   const { independentField, typedValue, recipient } = useSwapState()
@@ -354,7 +350,7 @@ export default function Swap({ history }: RouteComponentProps) {
     (approvalState === ApprovalState.NOT_APPROVED ||
       approvalState === ApprovalState.PENDING ||
       (approvalSubmitted && approvalState === ApprovalState.APPROVED)) &&
-    !(priceImpactSeverity > 3 && !isExpertMode)
+    !(priceImpactSeverity > 3)
 
   const handleConfirmDismiss = useCallback(() => {
     setSwapState({ showConfirm: false, tradeToConfirm, attemptingTxn, swapErrorMessage, txHash })
@@ -391,7 +387,7 @@ export default function Swap({ history }: RouteComponentProps) {
 
   const swapIsUnsupported = useIsSwapUnsupported(currencies[Field.INPUT], currencies[Field.OUTPUT])
 
-  const priceImpactTooHigh = priceImpactSeverity > 3 && !isExpertMode
+  const priceImpactTooHigh = priceImpactSeverity > 3
 
   return (
     <>
@@ -564,17 +560,13 @@ export default function Swap({ history }: RouteComponentProps) {
                     </ButtonConfirmed>
                     <ButtonError
                       onClick={() => {
-                        if (isExpertMode) {
-                          handleSwap()
-                        } else {
-                          setSwapState({
-                            tradeToConfirm: trade,
-                            attemptingTxn: false,
-                            swapErrorMessage: undefined,
-                            showConfirm: true,
-                            txHash: undefined,
-                          })
-                        }
+                        setSwapState({
+                          tradeToConfirm: trade,
+                          attemptingTxn: false,
+                          swapErrorMessage: undefined,
+                          showConfirm: true,
+                          txHash: undefined,
+                        })
                       }}
                       width="100%"
                       id="swap-button"
@@ -602,17 +594,13 @@ export default function Swap({ history }: RouteComponentProps) {
               ) : (
                 <ButtonError
                   onClick={() => {
-                    if (isExpertMode) {
-                      handleSwap()
-                    } else {
-                      setSwapState({
-                        tradeToConfirm: trade,
-                        attemptingTxn: false,
-                        swapErrorMessage: undefined,
-                        showConfirm: true,
-                        txHash: undefined,
-                      })
-                    }
+                    setSwapState({
+                      tradeToConfirm: trade,
+                      attemptingTxn: false,
+                      swapErrorMessage: undefined,
+                      showConfirm: true,
+                      txHash: undefined,
+                    })
                   }}
                   id="swap-button"
                   disabled={!isValid || routeIsSyncing || routeIsLoading || priceImpactTooHigh || !!swapCallbackError}
@@ -633,7 +621,7 @@ export default function Swap({ history }: RouteComponentProps) {
                   </Text>
                 </ButtonError>
               )}
-              {isExpertMode && swapErrorMessage ? <SwapCallbackError error={swapErrorMessage} /> : null}
+              {/* {isExpertMode && swapErrorMessage ? <SwapCallbackError error={swapErrorMessage} /> : null} */}
             </div>
           </AutoColumn>
         </Wrapper>
