@@ -38,7 +38,12 @@ export default function ConfirmSwapModal({
   onDismiss: () => void
 }) {
   const showAcceptChanges = useMemo(
-    () => Boolean(trade && originalTrade && tradeMeaningfullyDiffers(trade, originalTrade)),
+    () =>
+      Boolean(
+        trade &&
+          originalTrade &&
+          tradeMeaningfullyDiffers(trade as unknown as Trade<Currency, Currency, TradeType>, originalTrade)
+      ),
     [originalTrade, trade]
   )
 
@@ -58,7 +63,7 @@ export default function ConfirmSwapModal({
     return trade ? (
       <SwapModalFooter
         onConfirm={onConfirm}
-        trade={trade}
+        trade={trade as unknown as Trade<Currency, Currency, TradeType>}
         disabledConfirm={showAcceptChanges}
         swapErrorMessage={swapErrorMessage}
       />

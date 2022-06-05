@@ -5,7 +5,7 @@ import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import JSBI from 'jsbi'
 import { useSingleContractWithCallData } from 'lib/hooks/multicall'
 import { useMemo } from 'react'
-import { InterfaceTrade, TradeState } from 'state/routing/types'
+import { InterfaceTrade, InterfaceTradeClass, TradeState } from 'state/routing/types'
 
 import { useAllV3Routes } from './useAllV3Routes'
 import { useV3Quoter } from './useContract'
@@ -122,15 +122,11 @@ export function useClientSideV3Trade<TTradeType extends TradeType>(
 
     return {
       state: TradeState.VALID,
-      trade: new InterfaceTrade({
-        v2Routes: [],
-        v3Routes: [
-          {
-            routev3: bestRoute,
-            inputAmount: amountIn,
-            outputAmount: amountOut,
-          },
-        ],
+      trade: new InterfaceTradeClass({
+        inputAmount: amountIn,
+        outputAmount: amountOut,
+        inputCurrency: bestRoute.input,
+        outputCurrency: bestRoute.output,
         tradeType,
       }),
     }

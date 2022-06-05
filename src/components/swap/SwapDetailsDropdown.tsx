@@ -1,6 +1,5 @@
 import { Trans } from '@lingui/macro'
 import { Currency, Percent, TradeType } from '@uniswap/sdk-core'
-import AnimatedDropdown from 'components/AnimatedDropdown'
 import Card, { OutlineCard } from 'components/Card'
 import { AutoColumn } from 'components/Column'
 import { LoadingOpacityContainer } from 'components/Loader/styled'
@@ -18,7 +17,6 @@ import { HideSmall, ThemedText } from 'theme'
 import { AdvancedSwapDetails } from './AdvancedSwapDetails'
 import GasEstimateBadge from './GasEstimateBadge'
 import { ResponsiveTooltipContainer } from './styleds'
-import SwapRoute from './SwapRoute'
 import TradePrice from './TradePrice'
 
 const Wrapper = styled(Row)`
@@ -192,7 +190,7 @@ export default function SwapDetailsDropdown({
             <RotatingArrow stroke={trade ? theme.text3 : theme.bg3} open={Boolean(trade && showDetails)} />
           </RowFixed>
         </StyledHeaderRow>
-        <AnimatedDropdown open={showDetails}>
+        {/* <AnimatedDropdown open={showDetails}>
           <AutoColumn gap={'8px'} style={{ padding: '0', paddingBottom: '8px' }}>
             {trade ? (
               <StyledCard>
@@ -201,7 +199,7 @@ export default function SwapDetailsDropdown({
             ) : null}
             {trade ? <SwapRoute trade={trade} syncing={syncing} /> : null}
           </AutoColumn>
-        </AnimatedDropdown>
+        </AnimatedDropdown> */}
       </AutoColumn>
     </Wrapper>
   )

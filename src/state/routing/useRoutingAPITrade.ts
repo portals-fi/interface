@@ -11,7 +11,7 @@ import { useGetQuoteQuery } from 'state/routing/slice'
 import { useClientSideRouter } from 'state/user/hooks'
 
 import { GetQuoteResult, InterfaceTrade, TradeState } from './types'
-import { computeRoutes, transformRoutesToTrade } from './utils'
+import { computeRoutes } from './utils'
 
 /**
  * Returns the best trade by invoking the routing api or the smart order router on the client
@@ -96,16 +96,16 @@ export function useRoutingAPITrade<TTradeType extends TradeType>(
       }
     }
 
-    try {
-      const trade = transformRoutesToTrade(route, tradeType, gasUseEstimateUSD)
-      return {
-        // always return VALID regardless of isFetching status
-        state: isSyncing ? TradeState.SYNCING : TradeState.VALID,
-        trade,
-      }
-    } catch (e) {
-      return { state: TradeState.INVALID, trade: undefined }
-    }
+    // try {
+    //   const trade = transformRoutesToTrade(route, tradeType, gasUseEstimateUSD)
+    //   return {
+    //     // always return VALID regardless of isFetching status
+    //     state: isSyncing ? TradeState.SYNCING : TradeState.VALID,
+    //     trade,
+    //   }
+    // } catch (e) {
+    return { state: TradeState.INVALID, trade: undefined }
+    // }
   }, [
     currencyIn,
     currencyOut,

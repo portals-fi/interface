@@ -40,7 +40,7 @@ export default function useAutoSlippageTolerance(
   const outputDollarValue = useUSDCValue(trade?.outputAmount)
   const nativeGasPrice = useGasPrice()
 
-  const gasEstimate = guesstimateGas(trade)
+  const gasEstimate = guesstimateGas(trade as unknown as Trade<Currency, Currency, TradeType>)
   const nativeCurrency = useNativeCurrency()
   const nativeCurrencyPrice = useUSDCPrice((trade && nativeCurrency) ?? undefined)
 

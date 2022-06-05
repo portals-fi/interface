@@ -1,4 +1,5 @@
 import { Trans } from '@lingui/macro'
+import { Trade } from '@uniswap/router-sdk'
 import { Currency, Percent, TradeType } from '@uniswap/sdk-core'
 import Card from 'components/Card'
 import { LoadingRows } from 'components/Loader/styled'
@@ -59,7 +60,7 @@ export function AdvancedSwapDetails({
   const { expectedOutputAmount, priceImpact } = useMemo(() => {
     if (!trade) return { expectedOutputAmount: undefined, priceImpact: undefined }
     const expectedOutputAmount = trade.outputAmount
-    const realizedLpFeePercent = computeRealizedLPFeePercent(trade)
+    const realizedLpFeePercent = computeRealizedLPFeePercent(trade as unknown as Trade<Currency, Currency, TradeType>)
     const priceImpact = trade.priceImpact.subtract(realizedLpFeePercent)
     return { expectedOutputAmount, priceImpact }
   }, [trade])

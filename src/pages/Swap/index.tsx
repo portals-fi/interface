@@ -203,7 +203,10 @@ export default function Swap({ history }: RouteComponentProps) {
     currencies[Field.INPUT] && currencies[Field.OUTPUT] && parsedAmounts[independentField]?.greaterThan(JSBI.BigInt(0))
   )
 
-  const approvalOptimizedTrade = useApprovalOptimizedTrade(trade, allowedSlippage)
+  const approvalOptimizedTrade = useApprovalOptimizedTrade(
+    trade as unknown as Trade<Currency, Currency, TradeType>,
+    allowedSlippage
+  )
   const approvalOptimizedTradeString =
     approvalOptimizedTrade instanceof V2Trade
       ? 'V2SwapRouter'
@@ -361,7 +364,13 @@ export default function Swap({ history }: RouteComponentProps) {
   }, [attemptingTxn, onUserInput, swapErrorMessage, tradeToConfirm, txHash])
 
   const handleAcceptChanges = useCallback(() => {
-    setSwapState({ tradeToConfirm: trade, swapErrorMessage, txHash, attemptingTxn, showConfirm })
+    setSwapState({
+      tradeToConfirm: trade as unknown as Trade<Currency, Currency, TradeType>,
+      swapErrorMessage,
+      txHash,
+      attemptingTxn,
+      showConfirm,
+    })
   }, [attemptingTxn, showConfirm, swapErrorMessage, trade, txHash])
 
   const handleInputSelect = useCallback(
@@ -561,7 +570,7 @@ export default function Swap({ history }: RouteComponentProps) {
                     <ButtonError
                       onClick={() => {
                         setSwapState({
-                          tradeToConfirm: trade,
+                          tradeToConfirm: trade as unknown as Trade<Currency, Currency, TradeType>,
                           attemptingTxn: false,
                           swapErrorMessage: undefined,
                           showConfirm: true,
@@ -595,7 +604,7 @@ export default function Swap({ history }: RouteComponentProps) {
                 <ButtonError
                   onClick={() => {
                     setSwapState({
-                      tradeToConfirm: trade,
+                      tradeToConfirm: trade as unknown as Trade<Currency, Currency, TradeType>,
                       attemptingTxn: false,
                       swapErrorMessage: undefined,
                       showConfirm: true,
