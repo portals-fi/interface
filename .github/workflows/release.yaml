@@ -1,7 +1,7 @@
 name: Release
 on:
   schedule:
-    - cron:  '0 12 * * 1-4' # every day 12:00 UTC Monday-Thursday
+    - cron: '0 12 * * 1-4' # every day 12:00 UTC Monday-Thursday
 
   # manual trigger
   workflow_dispatch:
@@ -21,7 +21,7 @@ jobs:
         id: github_tag_action
         uses: mathieudutour/github-tag-action@331898d5052eedac9b15fec867b5ba66ebf9b692
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.HUB_TOKEN }}
           release_branches: .*
           default_bump: false
 
@@ -83,7 +83,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1.1.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.HUB_TOKEN }}
         with:
           tag_name: ${{ needs.bump_version.outputs.new_tag }}
           release_name: Release ${{ needs.bump_version.outputs.new_tag }}
