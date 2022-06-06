@@ -1,6 +1,6 @@
 overrideExisting: true
 schema: 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3'
-documents: 'src/**/!(*.d).{ts,tsx}'
+documents: 'src/state/data/**/!(*.d).{ts,tsx}'
 generates:
   ./src/state/data/generated.ts:
     plugins:
