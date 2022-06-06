@@ -31,7 +31,6 @@ export default function <TTradeType extends TradeType>(
         : [otherCurrency, amountSpecified?.currency],
     [amountSpecified, otherCurrency, tradeType]
   )
-  console.log(tradeType)
   const portalQueryArgs = usePortalArguments({
     tokenIn: currencyIn,
     tokenOut: currencyOut,
@@ -43,7 +42,6 @@ export default function <TTradeType extends TradeType>(
     refetchOnFocus: true,
   })
 
-  console.log(`${isLoading} ${isError} ${JSON.stringify(data)} ${JSON.stringify(currentData)}`)
   // return { trade: undefined, state: TradeState.NO_ROUTE_FOUND }
   const quoteResult = data
   //   const quoteResult: GetQuoteResult | undefined = useIsValidBlock(Number(data?.blockNumber) || 0) ? data : undefined

@@ -1,8 +1,10 @@
 // eslint-disable-next-line no-restricted-imports
-import { Percent, TradeType } from '@uniswap/sdk-core'
+import { Currency, Percent, TradeType } from '@uniswap/sdk-core'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { SwapCallbackState, useSwapCallback as useLibSwapCallBack } from 'lib/hooks/swap/useSwapCallback'
+import usePortalCallback from 'lib/hooks/portals/usePortalCallback'
+import { SwapCallbackState } from 'lib/hooks/swap/useSwapCallback'
 import { ReactNode, useMemo } from 'react'
+import { PortalsTrade } from 'state/routing/types'
 
 import { useTransactionAdder } from '../state/transactions/hooks'
 import { TransactionType } from '../state/transactions/types'
@@ -15,7 +17,7 @@ import useTransactionDeadline from './useTransactionDeadline'
 // returns a function that will execute a swap, if the parameters are all valid
 // and the user has approved the slippage adjusted input amount for the trade
 export function useSwapCallback(
-  trade: AnyTrade | undefined, // trade to execute, required
+  trade: AnyTrade | PortalsTrade<Currency, Currency, TradeType> | undefined, // trade to execute, required
   allowedSlippage: Percent, // in bips
   recipientAddressOrName: string | null, // the ENS name or address of the recipient of the trade, or null if swap should be returned to sender
   signatureData: SignatureData | undefined | null
@@ -33,7 +35,13 @@ export function useSwapCallback(
     state,
     callback: libCallback,
     error,
-  } = useLibSwapCallBack({ trade, allowedSlippage, recipientAddressOrName: recipient, signatureData, deadline })
+  } = usePortalCallback({
+    trade: trade as PortalsTrade<Currency, Currency, TradeType>,
+    allowedSlippage,
+    recipientAddressOrName: recipient,
+    signatureData,
+    deadline,
+  })
 
   const callback = useMemo(() => {
     if (!libCallback || !trade) {

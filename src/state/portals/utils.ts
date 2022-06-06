@@ -1,5 +1,5 @@
 import { Currency, CurrencyAmount, Token, TradeType } from '@uniswap/sdk-core'
-import { InterfaceTrade, InterfaceTradeClass } from 'state/routing/types'
+import { InterfaceTrade, PortalsTrade } from 'state/routing/types'
 
 import { PortalResponse } from './types'
 
@@ -13,7 +13,7 @@ export function transformResponseToTrade<TTradeType extends TradeType>(
   if (!result) {
     throw new Error('Portal Response not valid')
   }
-  return new InterfaceTradeClass({
+  return new PortalsTrade({
     // v2Routes:
     //   route
     //     ?.filter((r): r is typeof route[0] & { routev2: NonNullable<typeof route[0]['routev2']> } => r.routev2 !== null)
@@ -26,5 +26,6 @@ export function transformResponseToTrade<TTradeType extends TradeType>(
     outputAmount: CurrencyAmount.fromRawAmount(outputCurrency, result.context.minBuyAmount),
     tradeType,
     gasUseEstimateUSD,
+    tx: result.tx,
   })
 }

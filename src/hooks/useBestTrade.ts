@@ -3,7 +3,7 @@ import usePortalsTrade from 'lib/hooks/portals/usePortalsTrade'
 import { useMemo } from 'react'
 import { InterfaceTrade, TradeState } from 'state/routing/types'
 
-import { useClientSideV3Trade } from './useClientSideV3Trade'
+// import { useClientSideV3Trade } from './useClientSideV3Trade'
 import useDebounce from './useDebounce'
 import useIsWindowVisible from './useIsWindowVisible'
 
@@ -39,13 +39,13 @@ export function useBestTrade(
   const useFallback = !autoRouterSupported //|| routingAPITrade.state === TradeState.NO_ROUTE_FOUND
 
   // only use client side router if routing api trade failed or is not supported
-  const bestV3Trade = useClientSideV3Trade(
-    tradeType,
-    useFallback ? debouncedAmount : undefined,
-    useFallback ? debouncedOtherCurrency : undefined
-  )
+  // const bestV3Trade = useClientSideV3Trade(
+  //   tradeType,
+  //   useFallback ? debouncedAmount : undefined,
+  //   useFallback ? debouncedOtherCurrency : undefined
+  // )
 
-  usePortalsTrade(
+  const bestV3Trade = usePortalsTrade(
     tradeType,
     useFallback ? debouncedAmount : undefined,
     useFallback ? debouncedOtherCurrency : undefined

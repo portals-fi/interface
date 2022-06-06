@@ -40,6 +40,7 @@ export interface PortalResponse {
     data: string
     to: string
     from: string
-    gasLimit?: BigNumber
+    gasLimit?: { type: 'BigNumber'; hex: string }
+    value: { type: 'BigNumber'; hex: string }
   }
 }

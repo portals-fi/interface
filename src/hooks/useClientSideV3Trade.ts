@@ -123,10 +123,14 @@ export function useClientSideV3Trade<TTradeType extends TradeType>(
     return {
       state: TradeState.VALID,
       trade: new InterfaceTradeClass({
-        inputAmount: amountIn,
-        outputAmount: amountOut,
-        // inputCurrency: bestRoute.input,
-        // outputCurrency: bestRoute.output,
+        v2Routes: [],
+        v3Routes: [
+          {
+            routev3: bestRoute,
+            inputAmount: amountIn,
+            outputAmount: amountOut,
+          },
+        ],
         tradeType,
       }),
     }

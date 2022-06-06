@@ -1,8 +1,9 @@
-import { IRoute } from '@uniswap/router-sdk'
+import { IRoute, Trade } from '@uniswap/router-sdk'
 import { Currency, CurrencyAmount, Percent, Price, Token, TradeType } from '@uniswap/sdk-core'
 import { Pair } from '@uniswap/v2-sdk'
+import { Route as V2Route } from '@uniswap/v2-sdk'
 import { Pool } from '@uniswap/v3-sdk'
-// import { Pool, Route } from '@uniswap/v3-sdk'
+import { Route as V3Route } from '@uniswap/v3-sdk'
 
 export enum TradeState {
   LOADING,
@@ -122,7 +123,7 @@ export interface InterfaceTrade<TInput extends Currency, TOutput extends Currenc
   // static fromRoute<TInput extends Currency, TOutput extends Currency, TTradeType extends TradeType>(route: V2RouteSDK<TInput, TOutput> | V3RouteSDK<TInput, TOutput>, amount: TTradeType extends TradeType.EXACT_INPUT ? CurrencyAmount<TInput> : CurrencyAmount<TOutput>, tradeType: TTradeType): Promise<Trade<TInput, TOutput, TTradeType>>;
 }
 
-export class InterfaceTradeClass<TInput extends Currency, TOutput extends Currency, TTradeType extends TradeType>
+export class PortalsTrade<TInput extends Currency, TOutput extends Currency, TTradeType extends TradeType>
   implements InterfaceTrade<TInput, TOutput, TTradeType>
 {
   gasUseEstimateUSD: CurrencyAmount<Token> | null | undefined
@@ -155,16 +156,25 @@ export class InterfaceTradeClass<TInput extends Currency, TOutput extends Curren
   private _inputAmount: CurrencyAmount<TInput>
   readonly inputCurrency: TInput
   readonly outputCurrency: TOutput
+  readonly tx
   constructor({
     tradeType,
     inputAmount,
     outputAmount,
     gasUseEstimateUSD,
+    tx,
   }: {
     tradeType: TTradeType
     inputAmount: CurrencyAmount<TInput>
     outputAmount: CurrencyAmount<TOutput>
     gasUseEstimateUSD?: CurrencyAmount<Token> | undefined | null
+    tx?: {
+      data: string
+      to: string
+      from: string
+      gasLimit?: { type: 'BigNumber'; hex: string }
+      value: { type: 'BigNumber'; hex: string }
+    }
   }) {
     // super()
     // super({ v2Routes: [], v3Routes: [new Route([new Pool()])], tradeType })
@@ -176,6 +186,7 @@ export class InterfaceTradeClass<TInput extends Currency, TOutput extends Curren
     this._executionPrice = new Price({ baseAmount: inputAmount, quoteAmount: outputAmount })
     this.gasUseEstimateUSD = gasUseEstimateUSD
     this._priceImpact = new Percent('1')
+    this.tx = tx
   }
 
   public routes: IRoute<TInput, TOutput, Pair | Pool>[] = []
@@ -218,5 +229,34 @@ export class InterfaceTradeClass<TInput extends Currency, TOutput extends Curren
    */
   maximumAmountIn(slippageTolerance: Percent, amountIn?: CurrencyAmount<TInput>): CurrencyAmount<TInput> {
     return this.inputAmount
+  }
+}
+
+export class InterfaceTradeClass<
+  TInput extends Currency,
+  TOutput extends Currency,
+  TTradeType extends TradeType
+> extends Trade<TInput, TOutput, TTradeType> {
+  gasUseEstimateUSD: CurrencyAmount<Token> | null | undefined
+
+  constructor({
+    gasUseEstimateUSD,
+    ...routes
+  }: {
+    gasUseEstimateUSD?: CurrencyAmount<Token> | undefined | null
+    v2Routes: {
+      routev2: V2Route<TInput, TOutput>
+      inputAmount: CurrencyAmount<TInput>
+      outputAmount: CurrencyAmount<TOutput>
+    }[]
+    v3Routes: {
+      routev3: V3Route<TInput, TOutput>
+      inputAmount: CurrencyAmount<TInput>
+      outputAmount: CurrencyAmount<TOutput>
+    }[]
+    tradeType: TTradeType
+  }) {
+    super(routes)
+    this.gasUseEstimateUSD = gasUseEstimateUSD
   }
 }
