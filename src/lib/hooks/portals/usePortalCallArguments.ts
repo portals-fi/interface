@@ -38,8 +38,6 @@ export function usePortalCallArguments(
 
   return useMemo(() => {
     if (!trade || !recipient || !library || !account || !chainId || !deadline || !trade?.tx) return []
-    console.log('AAAAAAAAAA')
-    console.log(JSON.stringify(trade.tx))
     return [
       {
         address: trade.tx.to!,

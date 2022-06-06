@@ -55,7 +55,6 @@ export const portalsApi = createApi({
             validate,
             slippagePercentage,
           })
-          console.log(query)
           result = await fetch({
             url: `portal/${CHAIN_LOOKUP[tokenInChainId]}?${query}`,
             method: 'GET',
