@@ -125,8 +125,8 @@ export function useClientSideV3Trade<TTradeType extends TradeType>(
       trade: new InterfaceTradeClass({
         inputAmount: amountIn,
         outputAmount: amountOut,
-        inputCurrency: bestRoute.input,
-        outputCurrency: bestRoute.output,
+        // inputCurrency: bestRoute.input,
+        // outputCurrency: bestRoute.output,
         tradeType,
       }),
     }

@@ -1,4 +1,5 @@
 import { Currency, CurrencyAmount, TradeType } from '@uniswap/sdk-core'
+import usePortalsTrade from 'lib/hooks/portals/usePortalsTrade'
 import { useMemo } from 'react'
 import { InterfaceTrade, TradeState } from 'state/routing/types'
 
@@ -39,6 +40,12 @@ export function useBestTrade(
 
   // only use client side router if routing api trade failed or is not supported
   const bestV3Trade = useClientSideV3Trade(
+    tradeType,
+    useFallback ? debouncedAmount : undefined,
+    useFallback ? debouncedOtherCurrency : undefined
+  )
+
+  usePortalsTrade(
     tradeType,
     useFallback ? debouncedAmount : undefined,
     useFallback ? debouncedOtherCurrency : undefined

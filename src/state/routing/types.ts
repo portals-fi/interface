@@ -159,15 +159,11 @@ export class InterfaceTradeClass<TInput extends Currency, TOutput extends Curren
     tradeType,
     inputAmount,
     outputAmount,
-    inputCurrency,
-    outputCurrency,
     gasUseEstimateUSD,
   }: {
     tradeType: TTradeType
     inputAmount: CurrencyAmount<TInput>
     outputAmount: CurrencyAmount<TOutput>
-    inputCurrency: TInput
-    outputCurrency: TOutput
     gasUseEstimateUSD?: CurrencyAmount<Token> | undefined | null
   }) {
     // super()
@@ -175,8 +171,8 @@ export class InterfaceTradeClass<TInput extends Currency, TOutput extends Curren
     this._inputAmount = inputAmount
     this._outputAmountOverride = outputAmount
     this.tradeType = tradeType
-    this.inputCurrency = inputCurrency
-    this.outputCurrency = outputCurrency
+    this.inputCurrency = inputAmount.currency
+    this.outputCurrency = outputAmount.currency
     this._executionPrice = new Price({ baseAmount: inputAmount, quoteAmount: outputAmount })
     this.gasUseEstimateUSD = gasUseEstimateUSD
     this._priceImpact = new Percent('1')
