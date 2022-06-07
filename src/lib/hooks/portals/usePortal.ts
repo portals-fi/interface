@@ -21,8 +21,9 @@ import { usePortalApprovalState } from './usePortalApproval'
  */
 export default function <TTradeType extends TradeType>(
   tradeType: TTradeType,
-  amountSpecified?: CurrencyAmount<Currency>,
-  otherCurrency?: Currency
+  amountSpecified: CurrencyAmount<Currency> | undefined,
+  otherCurrency: Currency | undefined,
+  isWindowVisible: boolean
 ): {
   state: TradeState
   trade: InterfaceTrade<Currency, Currency, TTradeType> | undefined
@@ -43,6 +44,7 @@ export default function <TTradeType extends TradeType>(
     amount: amountSpecified,
     validate: isApproved,
     userAddress: account,
+    isWindowVisible,
   })
 
   const { isLoading, isError, data, currentData } = useGetPortalQuery(portalQueryArgs ?? skipToken, {

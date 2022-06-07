@@ -1,5 +1,5 @@
 import { Currency, CurrencyAmount, TradeType } from '@uniswap/sdk-core'
-import usePortalTrade from 'lib/hooks/portals/usePortalTrade'
+import usePortal from 'lib/hooks/portals/usePortal'
 import { useMemo } from 'react'
 import { InterfaceTrade, TradeState } from 'state/routing/types'
 
@@ -21,23 +21,11 @@ export function useBestTrade(
   state: TradeState
   trade: InterfaceTrade<Currency, Currency, TradeType> | undefined
 } {
-  const autoRouterSupported = false //useAutoRouterSupported()
   const isWindowVisible = useIsWindowVisible()
-
   const [debouncedAmount, debouncedOtherCurrency] = useDebounce(
     useMemo(() => [amountSpecified, otherCurrency], [amountSpecified, otherCurrency]),
     200
   )
-
-  const trade = usePortalTrade(tradeType, debouncedAmount, debouncedOtherCurrency)
-
-  // only return gas estimate from api if routing api trade is used
-  // return useMemo(
-  //   () => ({
-  //     ...(useFallback ? bestV3Trade : routingAPITrade),
-  //     ...(isLoading ? { state: TradeState.LOADING } : {}),
-  //   }),
-  //   [bestV3Trade, isLoading, routingAPITrade, useFallback]
-  // )
+  const trade = usePortal(tradeType, debouncedAmount, debouncedOtherCurrency, isWindowVisible)
   return trade
 }

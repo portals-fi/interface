@@ -13,16 +13,18 @@ export default function ({
   amount,
   validate,
   userAddress,
+  isWindowVisible,
 }: {
   tokenIn: Currency | undefined
   tokenOut: Currency | undefined
   amount: CurrencyAmount<Currency> | undefined
   validate: boolean
+  isWindowVisible: boolean
   userAddress?: string | null
 }) {
   return useMemo(
     () =>
-      !tokenIn || !tokenOut || !amount || tokenIn.equals(tokenOut) || (validate && !userAddress)
+      !tokenIn || !tokenOut || !amount || tokenIn.equals(tokenOut) || (validate && !userAddress) || !isWindowVisible
         ? undefined
         : {
             amount: amount.quotient.toString(),
@@ -39,6 +41,6 @@ export default function ({
             validate: validate ?? false,
             partner: ADDRESS_ZERO,
           },
-    [amount, tokenIn, tokenOut, userAddress, validate]
+    [amount, tokenIn, tokenOut, userAddress, validate, isWindowVisible]
   )
 }
