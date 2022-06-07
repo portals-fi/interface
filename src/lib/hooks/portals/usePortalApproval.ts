@@ -1,35 +1,52 @@
+import { skipToken } from '@reduxjs/toolkit/query/react'
 import { Trade } from '@uniswap/router-sdk'
 import { Currency, CurrencyAmount, Percent, Token, TradeType } from '@uniswap/sdk-core'
 import { Trade as V2Trade } from '@uniswap/v2-sdk'
 import { Trade as V3Trade } from '@uniswap/v3-sdk'
 import { SWAP_ROUTER_ADDRESSES, V2_ROUTER_ADDRESS, V3_ROUTER_ADDRESS } from 'constants/addresses'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import ms from 'ms.macro'
 import { useMemo } from 'react'
+import { useGetApprovalQuery } from 'state/portals/slice'
+import { TradeState } from 'state/routing/types'
 
-import { ApprovalState, useApproval, useApprovalStateForSpender } from '../useApproval'
+import { useApproval } from '../useApproval'
+import useApprovalArguments from './useApprovalArguments'
 export { ApprovalState } from '../useApproval'
 
-/** Returns approval state for all known swap routers */
-function useSwapApprovalStates(
-  trade: Trade<Currency, Currency, TradeType> | undefined,
-  allowedSlippage: Percent,
-  useIsPendingApproval: (token?: Token, spender?: string) => boolean
-): { v2: ApprovalState; v3: ApprovalState; v2V3: ApprovalState } {
-  const { chainId } = useActiveWeb3React()
+export function usePortalApprovalState(
+  currencyIn?: Currency,
+  currencyOut?: Currency,
+  amountSpecified?: CurrencyAmount<Currency>
+): { isApproved: boolean; state: TradeState; spender?: string } {
+  const { account } = useActiveWeb3React()
+  const approvalQueryArgs = useApprovalArguments({
+    tokenIn: currencyIn,
+    tokenOut: currencyOut,
+    amount: amountSpecified,
+    userAddress: account,
+  })
 
-  const amountToApprove = useMemo(
-    () => (trade && trade.inputAmount.currency.isToken ? trade.maximumAmountIn(allowedSlippage) : undefined),
-    [trade, allowedSlippage]
-  )
-
-  const v2RouterAddress = chainId ? V2_ROUTER_ADDRESS[chainId] : undefined
-  const v3RouterAddress = chainId ? V3_ROUTER_ADDRESS[chainId] : undefined
-  const swapRouterAddress = chainId ? SWAP_ROUTER_ADDRESSES[chainId] : undefined
-  const v2 = useApprovalStateForSpender(amountToApprove, v2RouterAddress, useIsPendingApproval)
-  const v3 = useApprovalStateForSpender(amountToApprove, v3RouterAddress, useIsPendingApproval)
-  const v2V3 = useApprovalStateForSpender(amountToApprove, swapRouterAddress, useIsPendingApproval)
-
-  return useMemo(() => ({ v2, v3, v2V3 }), [v2, v2V3, v3])
+  const { isLoading, isError, data, currentData } = useGetApprovalQuery(approvalQueryArgs ?? skipToken, {
+    pollingInterval: ms`15s`,
+    refetchOnFocus: true,
+  })
+  const isSyncing = currentData !== data
+  return useMemo(() => {
+    if ((isLoading && !data) || isSyncing) {
+      return { isApproved: true, state: TradeState.LOADING }
+    } else if (isError || !currentData) {
+      return { isApproved: false, state: TradeState.INVALID }
+    } else if (currencyIn?.isNative) {
+      return { isApproved: true, state: TradeState.VALID }
+    } else {
+      return {
+        isApproved: !currentData.context.shouldApprove,
+        state: TradeState.VALID,
+        spender: currentData.context.target,
+      }
+    }
+  }, [isLoading, isError, data, currentData, approvalQueryArgs])
 }
 
 export function useSwapRouterAddress(
@@ -61,15 +78,15 @@ export default function (
     | Trade<Currency, Currency, TradeType>
     | undefined,
   allowedSlippage: Percent,
-  useIsPendingApproval: (token?: Token, spender?: string) => boolean,
-  amount?: CurrencyAmount<Currency> // defaults to trade.maximumAmountIn(allowedSlippage)
+  useIsPendingApproval: (token?: Token, spender?: string) => boolean
 ) {
-  const amountToApprove = useMemo(
-    () => amount || (trade && trade.inputAmount.currency.isToken ? trade.maximumAmountIn(allowedSlippage) : undefined),
-    [amount, trade, allowedSlippage]
-  )
-  const spender = useSwapRouterAddress(trade)
-
+  const amountToApprove = useMemo(() => trade && trade.maximumAmountIn(allowedSlippage), [trade, allowedSlippage])
+  const [currencyIn, currencyOut, amount]: [
+    Currency | undefined,
+    Currency | undefined,
+    CurrencyAmount<Currency> | undefined
+  ] = useMemo(() => [trade?.inputAmount.currency, trade?.outputAmount.currency, trade?.inputAmount], [trade])
+  const { spender } = usePortalApprovalState(currencyIn, currencyOut, amount)
   const approval = useApproval(amountToApprove, spender, useIsPendingApproval)
   return approval
 }

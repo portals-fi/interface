@@ -139,17 +139,8 @@ export default function Swap({ history }: RouteComponentProps) {
     [independentField, parsedAmount, showWrap, trade]
   )
 
-  const [routeNotFound, routeIsLoading, routeIsSyncing] = useMemo(
-    () => [!trade?.swaps, TradeState.LOADING === tradeState, TradeState.SYNCING === tradeState],
-    [trade, tradeState]
-  )
-
   const fiatValueInput = useUSDCValue(trade?.inputAmount)
   const fiatValueOutput = useUSDCValue(trade?.outputAmount)
-  const priceImpact = useMemo(
-    () => (routeIsSyncing ? undefined : computeFiatValuePriceImpact(fiatValueInput, fiatValueOutput)),
-    [fiatValueInput, fiatValueOutput, routeIsSyncing]
-  )
 
   const { onSwitchTokens, onCurrencySelection, onUserInput, onChangeRecipient } = useSwapActionHandlers()
   const isValid = !swapInputError
@@ -216,6 +207,18 @@ export default function Swap({ history }: RouteComponentProps) {
 
   // check whether the user has approved the router on the input token
   const [approvalState, approveCallback] = useApproveCallbackFromTrade(approvalOptimizedTrade, allowedSlippage)
+  const [routeNotFound, routeIsLoading, routeIsSyncing] = useMemo(
+    () => [
+      !trade?.swaps,
+      TradeState.LOADING === tradeState || approvalState === ApprovalState.UNKNOWN,
+      TradeState.SYNCING === tradeState,
+    ],
+    [trade, tradeState, approvalState]
+  )
+  const priceImpact = useMemo(
+    () => (routeIsSyncing ? undefined : computeFiatValuePriceImpact(fiatValueInput, fiatValueOutput)),
+    [fiatValueInput, fiatValueOutput, routeIsSyncing]
+  )
   const transactionDeadline = useTransactionDeadline()
   const {
     state: signatureState,
@@ -612,7 +615,14 @@ export default function Swap({ history }: RouteComponentProps) {
                     })
                   }}
                   id="swap-button"
-                  disabled={!isValid || routeIsSyncing || routeIsLoading || priceImpactTooHigh || !!swapCallbackError}
+                  disabled={
+                    !isValid ||
+                    routeIsSyncing ||
+                    routeIsLoading ||
+                    priceImpactTooHigh ||
+                    !!swapCallbackError ||
+                    approvalState === ApprovalState.UNKNOWN
+                  }
                   error={isValid && priceImpactSeverity > 2 && !swapCallbackError}
                 >
                   <Text fontSize={20} fontWeight={500}>

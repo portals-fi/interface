@@ -1,5 +1,3 @@
-import { BigNumber } from '@ethersproject/bignumber'
-
 export const CHAIN_LOOKUP: { [key: number]: string } = {
   1: 'ethereum',
 }
@@ -17,7 +15,7 @@ export interface ApprovalResponse {
     data: string
     to: string
     from: string
-    gasLimit: BigNumber
+    gasLimit: { type: 'BigNumber'; hex: string }
   }
 }
 

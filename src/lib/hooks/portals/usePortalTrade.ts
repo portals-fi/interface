@@ -1,6 +1,7 @@
 import { skipToken } from '@reduxjs/toolkit/query/react'
 import { Currency, CurrencyAmount, TradeType } from '@uniswap/sdk-core'
 import { IMetric, MetricLoggerUnit, setGlobalMetric } from '@uniswap/smart-order-router'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useStablecoinAmountFromFiatValue } from 'hooks/useUSDCPrice'
 import usePortalArguments from 'lib/hooks/portals/usePortalArguments'
 import ms from 'ms.macro'
@@ -9,6 +10,8 @@ import ReactGA from 'react-ga4'
 import { useGetPortalQuery } from 'state/portals/slice'
 import { transformResponseToTrade } from 'state/portals/utils'
 import { InterfaceTrade, TradeState } from 'state/routing/types'
+
+import { usePortalApprovalState } from './usePortalApproval'
 
 /**
  * Returns the best trade by invoking the routing api or the smart order router on the client
@@ -31,10 +34,15 @@ export default function <TTradeType extends TradeType>(
         : [otherCurrency, amountSpecified?.currency],
     [amountSpecified, otherCurrency, tradeType]
   )
+  const { isApproved, state } = usePortalApprovalState(currencyIn, currencyOut, amountSpecified)
+
+  const { account } = useActiveWeb3React()
   const portalQueryArgs = usePortalArguments({
     tokenIn: currencyIn,
     tokenOut: currencyOut,
     amount: amountSpecified,
+    validate: isApproved,
+    userAddress: account,
   })
 
   const { isLoading, isError, data, currentData } = useGetPortalQuery(portalQueryArgs ?? skipToken, {
@@ -64,7 +72,7 @@ export default function <TTradeType extends TradeType>(
       }
     }
 
-    if (isLoading && !quoteResult) {
+    if ((isLoading && !quoteResult) || state === TradeState.LOADING) {
       // only on first hook render
       return {
         state: TradeState.LOADING,
@@ -84,6 +92,7 @@ export default function <TTradeType extends TradeType>(
     }
 
     if (isError || !otherAmount || !portalQueryArgs) {
+      console.warn('No route found')
       return {
         state: TradeState.NO_ROUTE_FOUND,
         trade: undefined,
@@ -98,19 +107,19 @@ export default function <TTradeType extends TradeType>(
         trade,
       }
     } catch (e) {
+      console.error(`Trade processing failed ${e}`)
       return { state: TradeState.INVALID, trade: undefined }
     }
   }, [
-    currencyIn,
-    currencyOut,
     quoteResult,
     isLoading,
-    tradeType,
     isError,
     // route,
     portalQueryArgs,
     // gasUseEstimateUSD,
     isSyncing,
+    state,
+    isApproved,
   ])
 }
 

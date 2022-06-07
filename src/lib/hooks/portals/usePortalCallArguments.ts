@@ -11,8 +11,8 @@ import { PortalsTrade } from 'state/routing/types'
 interface PortalCall {
   address: string
   calldata: string
-  value: string
-  //   gasLimit?: BigNumber
+  value: BigNumber
+  gasLimit?: BigNumber
 }
 
 /**
@@ -42,8 +42,8 @@ export function usePortalCallArguments(
       {
         address: trade.tx.to!,
         calldata: trade.tx.data!,
-        value: trade.tx.value!.hex,
-        // gasLimit: trade.tx.gasLimit,
+        value: trade.tx.value!,
+        gasLimit: trade.tx.gasLimit ? BigNumber.from(trade.tx.gasLimit) : undefined,
       },
     ]
   }, [

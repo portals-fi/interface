@@ -6,26 +6,27 @@ import { Currency, TradeType } from '@uniswap/sdk-core'
 import { useMemo } from 'react'
 import { PortalsTrade } from 'state/routing/types'
 import { calculateGasMargin } from 'utils/calculateGasMargin'
-import isZero from 'utils/isZero'
+import { isZeroBigNumber } from 'utils/isZero'
 import { swapErrorToUserReadableMessage } from 'utils/swapErrorToUserReadableMessage'
 
-interface SwapCall {
+interface PortalCall {
   address: string
   calldata: string
-  value: string
+  value: BigNumber
+  gasLimit?: BigNumber
 }
 
 interface SwapCallEstimate {
-  call: SwapCall
+  call: PortalCall
 }
 
 interface SuccessfulCall extends SwapCallEstimate {
-  call: SwapCall
+  call: PortalCall
   gasEstimate: BigNumber
 }
 
 interface FailedCall extends SwapCallEstimate {
-  call: SwapCall
+  call: PortalCall
   error: Error
 }
 
@@ -35,7 +36,7 @@ export default function (
   chainId: number | undefined,
   library: JsonRpcProvider | undefined,
   trade: PortalsTrade<Currency, Currency, TradeType> | undefined, // trade to execute, required
-  swapCalls: SwapCall[]
+  swapCalls: PortalCall[]
 ): { callback: null | (() => Promise<TransactionResponse>) } {
   return useMemo(() => {
     if (!trade || !library || !account || !chainId) {
@@ -48,7 +49,7 @@ export default function (
             const { address, calldata, value } = call
 
             const tx =
-              !value || isZero(value)
+              !value || isZeroBigNumber(value)
                 ? { from: account, to: address, data: calldata }
                 : {
                     from: account,
@@ -111,7 +112,7 @@ export default function (
             data: calldata,
             // let the wallet try if we can't estimate the gas
             ...('gasEstimate' in bestCallOption ? { gasLimit: calculateGasMargin(bestCallOption.gasEstimate) } : {}),
-            ...(value && !isZero(value) ? { value } : {}),
+            ...(value && !isZeroBigNumber(value) ? { value } : {}),
           })
           .then((response) => {
             return response

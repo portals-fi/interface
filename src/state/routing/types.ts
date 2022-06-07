@@ -1,3 +1,4 @@
+import { BigNumber } from '@ethersproject/bignumber'
 import { IRoute, Trade } from '@uniswap/router-sdk'
 import { Currency, CurrencyAmount, Percent, Price, Token, TradeType } from '@uniswap/sdk-core'
 import { Pair } from '@uniswap/v2-sdk'
@@ -172,8 +173,8 @@ export class PortalsTrade<TInput extends Currency, TOutput extends Currency, TTr
       data: string
       to: string
       from: string
-      gasLimit?: { type: 'BigNumber'; hex: string }
-      value: { type: 'BigNumber'; hex: string }
+      gasLimit?: BigNumber
+      value: BigNumber
     }
   }) {
     // super()

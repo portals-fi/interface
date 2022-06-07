@@ -7,38 +7,29 @@ import { useMemo } from 'react'
  * query should be skipped. Input arguments do not need to be memoized, as they will
  * be destructured.
  */
-export default function ({
+export default function useApprovalArguments({
   tokenIn,
   tokenOut,
   amount,
-  validate,
   userAddress,
 }: {
   tokenIn: Currency | undefined
   tokenOut: Currency | undefined
   amount: CurrencyAmount<Currency> | undefined
-  validate: boolean
-  userAddress?: string | null
+  userAddress: string | undefined | null
 }) {
   return useMemo(
     () =>
-      !tokenIn || !tokenOut || !amount || tokenIn.equals(tokenOut) || (validate && !userAddress)
+      !tokenIn || !tokenOut || !amount || tokenIn.equals(tokenOut) || !userAddress || tokenIn.isNative
         ? undefined
         : {
             amount: amount.quotient.toString(),
             tokenInAddress: tokenIn.isNative ? ADDRESS_ZERO : tokenIn.wrapped.address,
             tokenInChainId: tokenIn.chainId,
-            tokenInDecimals: tokenIn.decimals,
-            tokenInSymbol: tokenIn.symbol,
             tokenOutAddress: tokenOut.isNative ? ADDRESS_ZERO : tokenOut.wrapped.address,
             tokenOutChainId: tokenOut.chainId,
-            tokenOutDecimals: tokenOut.decimals,
-            tokenOutSymbol: tokenOut.symbol,
-            takerAddress: userAddress ?? ADDRESS_ZERO,
-            slippagePercentage: '0.02',
-            validate: validate ?? false,
-            partner: ADDRESS_ZERO,
+            takerAddress: userAddress,
           },
-    [amount, tokenIn, tokenOut, userAddress, validate]
+    [amount, tokenIn, tokenOut, userAddress]
   )
 }
