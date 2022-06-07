@@ -270,7 +270,7 @@ export default function Header() {
       <ClaimModal />
       <Title href=".">
         <UniIcon>
-          <Logo fill={darkMode ? white : black} width="24px" height="100%" title="logo" />
+          <Logo fill={darkMode ? white : black} width="36px" height="100%" title="logo" />
           <HolidayOrnament />
         </UniIcon>
       </Title>
