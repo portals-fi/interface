@@ -1,6 +1,6 @@
 {
-  "theme_color": "#8764e9",
-  "background_color": "#8764e9",
+  "theme_color": "#2a252d",
+  "background_color": "#2a252d",
   "homepage_url": "https://app.portals.fi",
   "display": "standalone",
   "start_url": ".",
