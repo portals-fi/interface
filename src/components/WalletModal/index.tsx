@@ -129,6 +129,8 @@ export default function WalletModal({
   // important that these are destructed from the account-specific web3-react context
   const { account, connector, activate, error } = useWeb3React()
 
+  const previousConnector = usePrevious(connector)
+
   const [walletView, setWalletView] = useState(WALLET_VIEWS.ACCOUNT)
   const previousWalletView = usePrevious(walletView)
 
@@ -148,10 +150,10 @@ export default function WalletModal({
 
   // close on connection, when logged out before
   useEffect(() => {
-    if (account && !previousAccount && walletModalOpen) {
+    if ((account && !previousAccount && walletModalOpen) || connector !== previousConnector) {
       toggleWalletModal()
     }
-  }, [account, previousAccount, toggleWalletModal, walletModalOpen])
+  }, [account, previousAccount, toggleWalletModal, walletModalOpen, connector])
 
   // always reset to account view
   useEffect(() => {
