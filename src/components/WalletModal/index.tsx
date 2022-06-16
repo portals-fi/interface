@@ -150,10 +150,12 @@ export default function WalletModal({
 
   // close on connection, when logged out before
   useEffect(() => {
-    if ((account && !previousAccount && walletModalOpen) || connector !== previousConnector) {
+    if ((account && !previousAccount && walletModalOpen) || (previousConnector && connector !== previousConnector)) {
+      console.log(connector)
+      console.log(previousConnector)
       toggleWalletModal()
     }
-  }, [account, previousAccount, toggleWalletModal, walletModalOpen, connector])
+  }, [account, previousAccount, toggleWalletModal, walletModalOpen, connector, previousConnector])
 
   // always reset to account view
   useEffect(() => {

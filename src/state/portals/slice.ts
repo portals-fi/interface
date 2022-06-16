@@ -3,7 +3,7 @@ import { ChainId } from '@uniswap/smart-order-router'
 import ms from 'ms.macro'
 import qs from 'qs'
 
-import { ApprovalResponse, CHAIN_LOOKUP, PortalResponse } from './types'
+import { ApprovalResponse, CHAIN_LOOKUP, PortalResponse, PriceResponse } from './types'
 
 type PortalArgs = {
   tokenInAddress: string
@@ -28,6 +28,11 @@ type ApprovalArgs = {
   tokenOutChainId: ChainId
   amount: string
   takerAddress: string
+}
+
+type PriceArgs = {
+  tokenAddress: string
+  tokenChainId: ChainId
 }
 
 export const portalsApi = createApi({
@@ -117,7 +122,37 @@ export const portalsApi = createApi({
         maxRetries: 0,
       },
     }),
+    getPrice: build.query<number, PriceArgs>({
+      async queryFn(args, _api, _extraOptions, fetch) {
+        const { tokenAddress, tokenChainId } = args
+
+        let result
+        try {
+          const query = qs.stringify({
+            addresses: tokenAddress,
+          })
+          console.log('Fetching approval data from Portals API')
+          result = await fetch({
+            url: `tokens/${CHAIN_LOOKUP[tokenChainId]}?${query}`,
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json', // Your headers
+            },
+          })
+          const response = result.data as PriceResponse
+          return { data: response.tokens[0].price }
+        } catch (e) {
+          // TODO: fall back to client-side quoter when auto router fails.
+          // deprecate 'legacy' v2/v3 routers first.
+          return { error: e as FetchBaseQueryError }
+        }
+      },
+      keepUnusedDataFor: ms`1 minute`,
+      extraOptions: {
+        maxRetries: 0,
+      },
+    }),
   }),
 })
 
-export const { useGetPortalQuery, useGetApprovalQuery } = portalsApi
+export const { useGetPortalQuery, useGetApprovalQuery, useGetPriceQuery } = portalsApi

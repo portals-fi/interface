@@ -2,6 +2,10 @@ export const CHAIN_LOOKUP: { [key: number]: string } = {
   1: 'ethereum',
 }
 
+export interface PriceResponse {
+  tokens: { price: number }[]
+}
+
 export interface ApprovalResponse {
   context: {
     network: string
