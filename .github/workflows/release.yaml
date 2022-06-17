@@ -55,7 +55,7 @@ jobs:
         id: upload
         uses: anantaramdas/ipfs-pinata-deploy-action@39bbda1ce1fe24c69c6f57861b8038278d53688d
         with:
-          pin-name: Uniswap ${{ needs.bump_version.outputs.new_tag }}
+          pin-name: Portals ${{ needs.bump_version.outputs.new_tag }}
           path: './build'
           pinata-api-key: ${{ secrets.PINATA_API_KEY }}
           pinata-secret-api-key: ${{ secrets.PINATA_API_SECRET_KEY }}
@@ -77,7 +77,7 @@ jobs:
       # - name: Update DNS with new IPFS hash
       #   env:
       #     CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
-      #     RECORD_DOMAIN: 'uniswap.org'
+      #     RECORD_DOMAIN: 'portals.fi'
       #     RECORD_NAME: '_dnslink.app'
       #     CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
       #   uses: textileio/cloudflare-update-dnslink@0fe7b7a1ffc865db3a4da9773f0f987447ad5848
@@ -97,12 +97,12 @@ jobs:
             - CIDv0: `${{ steps.upload.outputs.hash }}`
             - CIDv1: `${{ steps.convert_cidv0.outputs.cidv1 }}`
 
-            The latest release is always accessible via our alias to the Cloudflare IPFS gateway at [app.uniswap.org](https://app.uniswap.org).
+            The latest release is always accessible via our alias to the Cloudflare IPFS gateway at [app.portals.fi](https://app.portals.fi).
 
-            You can also access the Uniswap Interface directly from an IPFS gateway.
-            **BEWARE**: The Uniswap interface uses [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) to remember your settings, such as which tokens you have imported.
-            **You should always use an IPFS gateway that enforces origin separation**, or our alias to the latest release at [app.uniswap.org](https://app.uniswap.org).
-            Your Uniswap settings are never remembered across different URLs.
+            You can also access the Portals Interface directly from an IPFS gateway.
+            **BEWARE**: The Portals interface uses [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) to remember your settings, such as which tokens you have imported.
+            **You should always use an IPFS gateway that enforces origin separation**, or our alias to the latest release at [app.portals.fi](https://app.portals.fi).
+            Your Portals settings are never remembered across different URLs.
 
             IPFS gateways:
             - https://${{ steps.convert_cidv0.outputs.cidv1 }}.ipfs.dweb.link/
