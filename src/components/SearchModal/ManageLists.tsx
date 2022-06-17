@@ -322,7 +322,7 @@ export function ManageLists({
     async function fetchTempList() {
       fetchList(listUrlInput, false)
         .then((list) => setTempList(list))
-        .catch(() => setAddError(t`Error importing list`))
+        .catch((e) => setAddError(`${e}`))
     }
     // if valid url, fetch details for card
     if (validUrl) {
