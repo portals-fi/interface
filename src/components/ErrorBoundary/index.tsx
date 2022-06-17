@@ -47,7 +47,7 @@ type ErrorBoundaryState = {
   error: Error | null
 }
 
-const IS_UNISWAP = window.location.hostname === 'app.uniswap.org'
+const IS_UNISWAP = window.location.hostname === 'app.portals.fi'
 
 async function updateServiceWorker(): Promise<ServiceWorkerRegistration> {
   const ready = await navigator.serviceWorker.ready
