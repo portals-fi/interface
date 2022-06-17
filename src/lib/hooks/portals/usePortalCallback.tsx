@@ -43,7 +43,7 @@ export default function ({
   deadline,
   feeOptions,
 }: UsePortalCallbackArgs): UsePortalCallbackReturns {
-  const { account, chainId, library } = useActiveWeb3React()
+  const { account, chainId, provider } = useActiveWeb3React()
 
   const portalCalls = usePortalCallArguments(
     trade,
@@ -53,13 +53,13 @@ export default function ({
     deadline,
     feeOptions
   )
-  const { callback } = useSendPortalTransaction(account, chainId, library, trade, portalCalls)
+  const { callback } = useSendPortalTransaction(account, chainId, provider, trade, portalCalls)
 
   const { address: recipientAddress } = useENS(recipientAddressOrName)
   const recipient = recipientAddressOrName === null ? account : recipientAddress
 
   return useMemo(() => {
-    if (!trade || !library || !account || !chainId || !callback) {
+    if (!trade || !provider || !account || !chainId || !callback) {
       return { state: SwapCallbackState.INVALID, error: <Trans>Missing dependencies</Trans> }
     }
     if (!recipient) {
@@ -74,5 +74,5 @@ export default function ({
       state: SwapCallbackState.VALID,
       callback: async () => callback(),
     }
-  }, [trade, library, account, chainId, callback, recipient, recipientAddressOrName])
+  }, [trade, provider, account, chainId, callback, recipient, recipientAddressOrName])
 }

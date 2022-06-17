@@ -30,14 +30,14 @@ export function usePortalCallArguments(
   deadline: BigNumber | undefined,
   feeOptions: FeeOptions | undefined
 ): PortalCall[] {
-  const { account, chainId, library } = useActiveWeb3React()
+  const { account, chainId, provider } = useActiveWeb3React()
 
   const { address: recipientAddress } = useENS(recipientAddressOrName)
   const recipient = recipientAddressOrName === null ? account : recipientAddress
   const argentWalletContract = useArgentWalletContract()
 
   return useMemo(() => {
-    if (!trade || !recipient || !library || !account || !chainId || !deadline || !trade?.tx) return []
+    if (!trade || !recipient || !provider || !account || !chainId || !deadline || !trade?.tx) return []
     return [
       {
         address: trade.tx.to!,
@@ -53,7 +53,7 @@ export function usePortalCallArguments(
     chainId,
     deadline,
     feeOptions,
-    library,
+    provider,
     recipient,
     signatureData,
     trade,
