@@ -19,7 +19,7 @@ import { usePortalApprovalState } from './usePortalApproval'
  * @param amountSpecified the exact amount to swap in/out
  * @param otherCurrency the desired output/payment currency
  */
-export default function <TTradeType extends TradeType>(
+export default function usePortal<TTradeType extends TradeType>(
   tradeType: TTradeType,
   amountSpecified: CurrencyAmount<Currency> | undefined,
   otherCurrency: Currency | undefined,
@@ -121,7 +121,10 @@ export default function <TTradeType extends TradeType>(
     // gasUseEstimateUSD,
     isSyncing,
     state,
-    isApproved,
+    currencyIn,
+    currencyOut,
+    gasUseEstimateUSD,
+    tradeType,
   ])
 }
 

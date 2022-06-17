@@ -48,7 +48,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
     }
 
     return new Price(currency, stablecoin, parseAmount('1', currency).quotient, stableAmount)
-  }, [currency, stablecoin, currentData, stableAmount])
+  }, [currency, stablecoin, stableAmount])
 
   const lastPrice = useRef(price)
   if (!price || !lastPrice.current || !price.equalTo(lastPrice.current)) {

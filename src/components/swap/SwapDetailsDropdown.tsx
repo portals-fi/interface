@@ -1,6 +1,6 @@
 import { Trans } from '@lingui/macro'
 import { Currency, Percent, TradeType } from '@uniswap/sdk-core'
-import Card, { OutlineCard } from 'components/Card'
+import Card from 'components/Card'
 import { AutoColumn } from 'components/Column'
 import { LoadingOpacityContainer } from 'components/Loader/styled'
 import Row, { RowBetween, RowFixed } from 'components/Row'
@@ -31,10 +31,10 @@ const StyledInfoIcon = styled(Info)`
   color: ${({ theme }) => theme.text3};
 `
 
-const StyledCard = styled(OutlineCard)`
-  padding: 12px;
-  border: 1px solid ${({ theme }) => theme.bg2};
-`
+// const StyledCard = styled(OutlineCard)`
+//   padding: 12px;
+//   border: 1px solid ${({ theme }) => theme.bg2};
+// `
 
 const StyledHeaderRow = styled(RowBetween)<{ disabled: boolean; open: boolean }>`
   padding: 4px 8px;

@@ -46,7 +46,7 @@ export function usePortalApprovalState(
         spender: currentData.context.target,
       }
     }
-  }, [isLoading, isError, data, currentData, approvalQueryArgs])
+  }, [isLoading, isError, data, currentData, isSyncing, currencyIn])
 }
 
 export function useSwapRouterAddress(
@@ -71,7 +71,7 @@ export function useSwapRouterAddress(
 }
 
 // wraps useApproveCallback in the context of a swap
-export default function (
+export default function usePortalApproval(
   trade:
     | V2Trade<Currency, Currency, TradeType>
     | V3Trade<Currency, Currency, TradeType>

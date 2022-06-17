@@ -31,7 +31,7 @@ interface FailedCall extends SwapCallEstimate {
 }
 
 // returns a function that will execute a swap, if the parameters are all valid
-export default function (
+export default function useSendPortalTransaction(
   account: string | null | undefined,
   chainId: number | undefined,
   library: JsonRpcProvider | undefined,

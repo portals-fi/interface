@@ -7,7 +7,7 @@ import { useMemo } from 'react'
  * query should be skipped. Input arguments do not need to be memoized, as they will
  * be destructured.
  */
-export default function ({
+export default function usePortalArguments({
   tokenIn,
   tokenOut,
   amount,

@@ -2,7 +2,6 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { Currency, Percent, TradeType } from '@uniswap/sdk-core'
 import { FeeOptions } from '@uniswap/v3-sdk'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { useArgentWalletContract } from 'hooks/useArgentWalletContract'
 import useENS from 'hooks/useENS'
 import { SignatureData } from 'hooks/useERC20Permit'
 import { useMemo } from 'react'
@@ -34,28 +33,28 @@ export function usePortalCallArguments(
 
   const { address: recipientAddress } = useENS(recipientAddressOrName)
   const recipient = recipientAddressOrName === null ? account : recipientAddress
-  const argentWalletContract = useArgentWalletContract()
+  // const argentWalletContract = useArgentWalletContract()
 
   return useMemo(() => {
     if (!trade || !recipient || !provider || !account || !chainId || !deadline || !trade?.tx) return []
     return [
       {
-        address: trade.tx.to!,
-        calldata: trade.tx.data!,
-        value: trade.tx.value!,
+        address: trade.tx.to,
+        calldata: trade.tx.data,
+        value: trade.tx.value,
         gasLimit: trade.tx.gasLimit ? BigNumber.from(trade.tx.gasLimit) : undefined,
       },
     ]
   }, [
     account,
-    allowedSlippage,
-    argentWalletContract,
+    // allowedSlippage,
+    // argentWalletContract,
     chainId,
     deadline,
-    feeOptions,
+    // feeOptions,
     provider,
     recipient,
-    signatureData,
+    // signatureData,
     trade,
   ])
 }

@@ -2,7 +2,6 @@ import { skipToken } from '@reduxjs/toolkit/query/react'
 import { Currency, CurrencyAmount, TradeType } from '@uniswap/sdk-core'
 import { IMetric, MetricLoggerUnit, setGlobalMetric } from '@uniswap/smart-order-router'
 import { sendTiming } from 'components/analytics'
-import { useStablecoinAmountFromFiatValue } from 'hooks/useUSDCPrice'
 import { useRoutingAPIArguments } from 'lib/hooks/routing/useRoutingAPIArguments'
 import useIsValidBlock from 'lib/hooks/useIsValidBlock'
 import ms from 'ms.macro'
@@ -45,7 +44,12 @@ export function useRoutingAPITrade<TTradeType extends TradeType>(
     useClientSideRouter: clientSideRouter,
   })
 
-  const { isLoading, isError, data, currentData } = useGetQuoteQuery(queryArgs ?? skipToken, {
+  const {
+    isLoading,
+    isError,
+    data,
+    // currentData,
+  } = useGetQuoteQuery(queryArgs ?? skipToken, {
     pollingInterval: ms`15s`,
     refetchOnFocus: true,
   })
@@ -58,9 +62,9 @@ export function useRoutingAPITrade<TTradeType extends TradeType>(
   )
 
   // get USD gas cost of trade in active chains stablecoin amount
-  const gasUseEstimateUSD = useStablecoinAmountFromFiatValue(quoteResult?.gasUseEstimateUSD) ?? null
+  // const gasUseEstimateUSD = useStablecoinAmountFromFiatValue(quoteResult?.gasUseEstimateUSD) ?? null
 
-  const isSyncing = currentData !== data
+  // const isSyncing = currentData !== data
 
   return useMemo(() => {
     if (!currencyIn || !currencyOut) {
@@ -115,8 +119,8 @@ export function useRoutingAPITrade<TTradeType extends TradeType>(
     isError,
     route,
     queryArgs,
-    gasUseEstimateUSD,
-    isSyncing,
+    // gasUseEstimateUSD,
+    // isSyncing,
   ])
 }
 

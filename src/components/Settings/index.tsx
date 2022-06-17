@@ -4,8 +4,8 @@ import { Percent } from '@uniswap/sdk-core'
 import { sendEvent } from 'components/analytics'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { AUTO_ROUTER_SUPPORTED_CHAINS } from 'lib/hooks/routing/clientSideSmartOrderRouter'
-import { useContext, useRef, useState } from 'react'
-import { Settings, X } from 'react-feather'
+import { useContext, useRef } from 'react'
+import { Settings } from 'react-feather'
 import { Text } from 'rebass'
 import styled, { ThemeContext } from 'styled-components/macro'
 
@@ -33,17 +33,17 @@ const StyledMenuIcon = styled(Settings)`
   }
 `
 
-const StyledCloseIcon = styled(X)`
-  height: 20px;
-  width: 20px;
-  :hover {
-    cursor: pointer;
-  }
+// const StyledCloseIcon = styled(X)`
+//   height: 20px;
+//   width: 20px;
+//   :hover {
+//     cursor: pointer;
+//   }
 
-  > * {
-    stroke: ${({ theme }) => theme.text1};
-  }
-`
+//   > * {
+//     stroke: ${({ theme }) => theme.text1};
+//   }
+// `
 
 const StyledMenuButton = styled.button`
   position: relative;
@@ -62,12 +62,12 @@ const StyledMenuButton = styled.button`
     outline: none;
   }
 `
-const EmojiWrapper = styled.div`
-  position: absolute;
-  bottom: -6px;
-  right: 0px;
-  font-size: 14px;
-`
+// const EmojiWrapper = styled.div`
+//   position: absolute;
+//   bottom: -6px;
+//   right: 0px;
+//   font-size: 14px;
+// `
 
 const StyledMenu = styled.div`
   margin-left: 0.5rem;
@@ -101,20 +101,20 @@ const MenuFlyout = styled.span`
   user-select: none;
 `
 
-const Break = styled.div`
-  width: 100%;
-  height: 1px;
-  background-color: ${({ theme }) => theme.bg3};
-`
+// const Break = styled.div`
+//   width: 100%;
+//   height: 1px;
+//   background-color: ${({ theme }) => theme.bg3};
+// `
 
-const ModalContentWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 0;
-  background-color: ${({ theme }) => theme.bg2};
-  border-radius: 20px;
-`
+// const ModalContentWrapper = styled.div`
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   padding: 2rem 0;
+//   background-color: ${({ theme }) => theme.bg2};
+//   border-radius: 20px;
+// `
 
 export default function SettingsTab({ placeholderSlippage }: { placeholderSlippage: Percent }) {
   const { chainId } = useActiveWeb3React()
@@ -130,7 +130,7 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
   const [clientSideRouter, setClientSideRouter] = useClientSideRouter()
 
   // show confirmation view before turning on
-  const [showConfirmation, setShowConfirmation] = useState(false)
+  // const [showConfirmation, setShowConfirmation] = useState(false)
 
   useOnClickOutside(node, open ? toggle : undefined)
 
