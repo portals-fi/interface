@@ -4,7 +4,6 @@ import { Connector } from '@web3-react/types'
 import { sendEvent } from 'components/analytics'
 import { AutoColumn } from 'components/Column'
 import { AutoRow } from 'components/Row'
-import usePrevious from 'hooks/usePrevious'
 import { useCallback, useEffect, useState } from 'react'
 import { ArrowLeft } from 'react-feather'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
@@ -123,8 +122,6 @@ export default function WalletModal({
   const dispatch = useAppDispatch()
   const { connector, account } = useWeb3React()
 
-  const previousConnector = usePrevious(connector)
-
   const [walletView, setWalletView] = useState(WALLET_VIEWS.ACCOUNT)
 
   const [pendingConnector, setPendingConnector] = useState<Connector | undefined>()
@@ -140,13 +137,10 @@ export default function WalletModal({
   }, [setWalletView])
 
   useEffect(() => {
-    if (previousConnector && connector !== previousConnector) {
-      toggleWalletModal()
-    }
     if (walletModalOpen) {
       setWalletView(account ? WALLET_VIEWS.ACCOUNT : WALLET_VIEWS.OPTIONS)
     }
-  }, [account, toggleWalletModal, walletModalOpen, connector, previousConnector, setWalletView])
+  }, [walletModalOpen, setWalletView, account])
 
   useEffect(() => {
     if (pendingConnector && walletView !== WALLET_VIEWS.PENDING) {
