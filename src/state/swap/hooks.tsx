@@ -1,7 +1,6 @@
 import { Trans } from '@lingui/macro'
 import { Currency, CurrencyAmount, Percent, TradeType } from '@uniswap/sdk-core'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import useAutoSlippageTolerance from 'hooks/useAutoSlippageTolerance'
 import { useBestTrade } from 'hooks/useBestTrade'
 import tryParseCurrencyAmount from 'lib/utils/tryParseCurrencyAmount'
 import { ParsedQs } from 'qs'
@@ -113,8 +112,13 @@ export function useDerivedSwapInfo(): {
     [inputCurrency, isExactIn, outputCurrency, typedValue]
   )
 
+  // allowed slippage is either auto slippage, or custom user defined slippage if auto slippage disabled
+  const autoSlippageTolerance = new Percent(3, 100)
+  const allowedSlippage = useUserSlippageToleranceWithDefault(autoSlippageTolerance)
+
   const trade = useBestTrade(
     isExactIn ? TradeType.EXACT_INPUT : TradeType.EXACT_OUTPUT,
+    allowedSlippage,
     parsedAmount,
     (isExactIn ? outputCurrency : inputCurrency) ?? undefined
   )
@@ -134,10 +138,6 @@ export function useDerivedSwapInfo(): {
     }),
     [inputCurrency, outputCurrency]
   )
-
-  // allowed slippage is either auto slippage, or custom user defined slippage if auto slippage disabled
-  const autoSlippageTolerance = useAutoSlippageTolerance(trade.trade)
-  const allowedSlippage = useUserSlippageToleranceWithDefault(autoSlippageTolerance)
 
   const inputError = useMemo(() => {
     let inputError: ReactNode | undefined

@@ -1,5 +1,5 @@
 import { skipToken } from '@reduxjs/toolkit/query/react'
-import { Currency, CurrencyAmount, TradeType } from '@uniswap/sdk-core'
+import { Currency, CurrencyAmount, Percent, TradeType } from '@uniswap/sdk-core'
 import { IMetric, MetricLoggerUnit, setGlobalMetric } from '@uniswap/smart-order-router'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useStablecoinAmountFromFiatValue } from 'hooks/useUSDCPrice'
@@ -23,6 +23,7 @@ export default function usePortal<TTradeType extends TradeType>(
   tradeType: TTradeType,
   amountSpecified: CurrencyAmount<Currency> | undefined,
   otherCurrency: Currency | undefined,
+  slippagePercentage: Percent,
   isWindowVisible: boolean
 ): {
   state: TradeState
@@ -45,6 +46,7 @@ export default function usePortal<TTradeType extends TradeType>(
     validate: isApproved,
     userAddress: account,
     isWindowVisible,
+    slippagePercentage,
   })
 
   const { isLoading, isError, data, currentData } = useGetPortalQuery(portalQueryArgs ?? skipToken, {

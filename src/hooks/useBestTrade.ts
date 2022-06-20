@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, TradeType } from '@uniswap/sdk-core'
+import { Currency, CurrencyAmount, Percent, TradeType } from '@uniswap/sdk-core'
 import usePortal from 'lib/hooks/portals/usePortal'
 import { useMemo } from 'react'
 import { InterfaceTrade, TradeState } from 'state/routing/types'
@@ -15,6 +15,7 @@ import useIsWindowVisible from './useIsWindowVisible'
  */
 export function useBestTrade(
   tradeType: TradeType,
+  slippagePercentage: Percent,
   amountSpecified?: CurrencyAmount<Currency>,
   otherCurrency?: Currency
 ): {
@@ -26,6 +27,6 @@ export function useBestTrade(
     useMemo(() => [amountSpecified, otherCurrency], [amountSpecified, otherCurrency]),
     200
   )
-  const trade = usePortal(tradeType, debouncedAmount, debouncedOtherCurrency, isWindowVisible)
+  const trade = usePortal(tradeType, debouncedAmount, debouncedOtherCurrency, slippagePercentage, isWindowVisible)
   return trade
 }

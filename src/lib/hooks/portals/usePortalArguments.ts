@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount } from '@uniswap/sdk-core'
+import { Currency, CurrencyAmount, Percent } from '@uniswap/sdk-core'
 import { ADDRESS_ZERO } from '@uniswap/v3-sdk'
 import { useMemo } from 'react'
 
@@ -14,17 +14,25 @@ export default function usePortalArguments({
   validate,
   userAddress,
   isWindowVisible,
+  slippagePercentage,
 }: {
   tokenIn: Currency | undefined
   tokenOut: Currency | undefined
   amount: CurrencyAmount<Currency> | undefined
   validate: boolean
   isWindowVisible: boolean
+  slippagePercentage: Percent
   userAddress?: string | null
 }) {
   return useMemo(
     () =>
-      !tokenIn || !tokenOut || !amount || tokenIn.equals(tokenOut) || (validate && !userAddress) || !isWindowVisible
+      !tokenIn ||
+      !tokenOut ||
+      !amount ||
+      tokenIn.equals(tokenOut) ||
+      (validate && !userAddress) ||
+      !isWindowVisible ||
+      !slippagePercentage
         ? undefined
         : {
             amount: amount.quotient.toString(),
@@ -37,10 +45,10 @@ export default function usePortalArguments({
             tokenOutDecimals: tokenOut.decimals,
             tokenOutSymbol: tokenOut.symbol,
             takerAddress: userAddress ?? ADDRESS_ZERO,
-            slippagePercentage: '0.02',
+            slippagePercentage: slippagePercentage?.asFraction.toFixed(3),
             validate: validate ?? false,
             partner: ADDRESS_ZERO,
           },
-    [amount, tokenIn, tokenOut, userAddress, validate, isWindowVisible]
+    [amount, tokenIn, tokenOut, userAddress, validate, isWindowVisible, slippagePercentage]
   )
 }
