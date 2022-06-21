@@ -7,7 +7,6 @@ import { useLocationLinkProps } from 'hooks/useLocationLinkProps'
 import React, { useEffect, useRef, useState } from 'react'
 import { BookOpen, Check, ChevronLeft, Coffee, Globe, MessageCircle } from 'react-feather'
 import { Link } from 'react-router-dom'
-import { useDarkModeManager } from 'state/user/hooks'
 import styled, { css } from 'styled-components/macro'
 
 import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
@@ -202,7 +201,7 @@ export default function Menu() {
   // const openClaimModal = useToggleModal(ApplicationModal.ADDRESS_CLAIM)
   // const showUNIClaimOption = Boolean(!!account && !!chainId && !L2_CHAIN_IDS.includes(chainId))
 
-  const [darkMode, toggleDarkMode] = useDarkModeManager()
+  // const [darkMode, toggleDarkMode] = useDarkModeManager()
 
   const [menu, setMenu] = useState<'main' | 'lang'>('main')
 
