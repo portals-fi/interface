@@ -14,7 +14,7 @@ import styled from 'styled-components/macro'
 import MetamaskIcon from '../../assets/images/metamask.png'
 import TallyIcon from '../../assets/images/tally.png'
 import { ReactComponent as Close } from '../../assets/images/x.svg'
-import { fortmatic, getWalletForConnector, injected } from '../../connectors'
+import { getWalletForConnector, injected } from '../../connectors'
 import { SUPPORTED_WALLETS } from '../../constants/wallet'
 import { useModalOpen, useWalletModalToggle } from '../../state/application/hooks'
 import { ApplicationModal } from '../../state/application/reducer'
@@ -163,9 +163,9 @@ export default function WalletModal({
       try {
         // Fortmatic opens it's own modal on activation to log in. This modal has a tabIndex
         // collision into the WalletModal, so we special case by closing the modal.
-        if (connector === fortmatic) {
-          toggleWalletModal()
-        }
+        // if (connector === fortmatic) {
+        //   toggleWalletModal()
+        // }
 
         setPendingConnector(connector)
         setWalletView(WALLET_VIEWS.PENDING)
@@ -179,7 +179,7 @@ export default function WalletModal({
         dispatch(updateWalletError({ wallet, error: error.message }))
       }
     },
-    [dispatch, toggleWalletModal]
+    [dispatch]
   )
 
   // get wallets user can switch too, depending on device/browser

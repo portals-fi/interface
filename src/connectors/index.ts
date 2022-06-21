@@ -1,6 +1,5 @@
 import { CoinbaseWallet } from '@web3-react/coinbase-wallet'
 import { initializeConnector, Web3ReactHooks } from '@web3-react/core'
-import { EIP1193 } from '@web3-react/eip1193'
 import { GnosisSafe } from '@web3-react/gnosis-safe'
 import { MetaMask } from '@web3-react/metamask'
 import { Network } from '@web3-react/network'
@@ -8,7 +7,6 @@ import { Connector } from '@web3-react/types'
 import { WalletConnect } from '@web3-react/walletconnect'
 import { SupportedChainId } from 'constants/chains'
 import { INFURA_NETWORK_URLS } from 'constants/infura'
-import Fortmatic from 'fortmatic'
 import { useMemo } from 'react'
 
 import UNISWAP_LOGO_URL from '../assets/svg/logo.svg'
@@ -102,9 +100,9 @@ export const [walletConnect, walletConnectHooks] = initializeConnector<WalletCon
     })
 )
 
-export const [fortmatic, fortmaticHooks] = initializeConnector<EIP1193>(
-  (actions) => new EIP1193({ actions, provider: new Fortmatic(process.env.REACT_APP_FORTMATIC_KEY).getProvider() })
-)
+// export const [fortmatic, fortmaticHooks] = initializeConnector<EIP1193>(
+//   (actions) => new EIP1193({ actions, provider: new Fortmatic(process.env.REACT_APP_FORTMATIC_KEY).getProvider() })
+// )
 
 export const [coinbaseWallet, coinbaseWalletHooks] = initializeConnector<CoinbaseWallet>(
   (actions) =>
