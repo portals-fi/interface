@@ -78,6 +78,7 @@ export default function usePortal<TTradeType extends TradeType>(
 
     if ((isLoading && !quoteResult) || state === TradeState.LOADING) {
       // only on first hook render
+      console.log('Route loading')
       return {
         state: TradeState.LOADING,
         trade: undefined,

@@ -212,12 +212,15 @@ export default function Swap({ history }: RouteComponentProps) {
   const [approvalState, approveCallback] = useApproveCallbackFromTrade(approvalOptimizedTrade, allowedSlippage)
   const [routeNotFound, routeIsLoading, routeIsSyncing] = useMemo(
     () => [
-      !trade?.swaps,
+      tradeState === TradeState.NO_ROUTE_FOUND || tradeState === TradeState.INVALID,
       TradeState.LOADING === tradeState || approvalState === ApprovalState.UNKNOWN,
       TradeState.SYNCING === tradeState,
     ],
     [trade, tradeState, approvalState]
   )
+  console.log(`NOT FOUND ${routeNotFound}`)
+  console.log(`LOADING ${routeIsLoading}`)
+  console.log(`SYNCING ${routeIsSyncing}`)
   const priceImpact = useMemo(
     () => (routeIsSyncing ? undefined : computeFiatValuePriceImpact(fiatValueInput, fiatValueOutput)),
     [fiatValueInput, fiatValueOutput, routeIsSyncing]
@@ -491,7 +494,7 @@ export default function Swap({ history }: RouteComponentProps) {
               <SwapDetailsDropdown
                 trade={trade}
                 syncing={routeIsSyncing}
-                loading={routeIsLoading}
+                loading={routeIsLoading && !routeNotFound}
                 showInverted={showInverted}
                 setShowInverted={setShowInverted}
                 allowedSlippage={allowedSlippage}
@@ -518,7 +521,7 @@ export default function Swap({ history }: RouteComponentProps) {
                     <Trans>Unwrap</Trans>
                   ) : null}
                 </ButtonPrimary>
-              ) : routeNotFound && userHasSpecifiedInputOutput && !routeIsLoading && !routeIsSyncing ? (
+              ) : routeNotFound && userHasSpecifiedInputOutput && !routeIsSyncing ? (
                 <GreyCard style={{ textAlign: 'center' }}>
                   <ThemedText.Main mb="4px">
                     <Trans>Insufficient liquidity for this trade.</Trans>

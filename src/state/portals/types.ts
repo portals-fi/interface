@@ -1,5 +1,8 @@
 export const CHAIN_LOOKUP: { [key: number]: string } = {
   1: 'ethereum',
+  137: 'polygon',
+  42161: 'arbitrum',
+  10: 'optimism',
 }
 
 export interface PriceResponse {
