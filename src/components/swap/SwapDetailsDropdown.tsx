@@ -3,13 +3,10 @@ import { Currency, Percent, TradeType } from '@uniswap/sdk-core'
 import Card from 'components/Card'
 import { AutoColumn } from 'components/Column'
 import { LoadingOpacityContainer } from 'components/Loader/styled'
-import Row, { RowBetween, RowFixed } from 'components/Row'
+import Row, { RowFixed } from 'components/Row'
 import { MouseoverTooltipContent } from 'components/Tooltip'
 // import { SUPPORTED_GAS_ESTIMATE_CHAIN_IDS } from 'constants/chains'
-import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { darken } from 'polished'
-import { useState } from 'react'
-import { ChevronDown, Info } from 'react-feather'
+import { Info } from 'react-feather'
 import { InterfaceTrade } from 'state/routing/types'
 import styled, { keyframes, useTheme } from 'styled-components/macro'
 import { HideSmall, ThemedText } from 'theme'
@@ -36,23 +33,23 @@ const StyledInfoIcon = styled(Info)`
 //   border: 1px solid ${({ theme }) => theme.bg2};
 // `
 
-const StyledHeaderRow = styled(RowBetween)<{ disabled: boolean; open: boolean }>`
-  padding: 4px 8px;
-  border-radius: 12px;
-  background-color: ${({ open, theme }) => (open ? theme.bg1 : 'transparent')};
-  align-items: center;
-  cursor: ${({ disabled }) => (disabled ? 'initial' : 'pointer')};
-  min-height: 40px;
+// const StyledHeaderRow = styled(RowBetween)<{ disabled: boolean; open: boolean }>`
+//   padding: 4px 8px;
+//   border-radius: 12px;
+//   background-color: ${({ open, theme }) => (open ? theme.bg1 : 'transparent')};
+//   align-items: center;
+//   cursor: ${({ disabled }) => (disabled ? 'initial' : 'pointer')};
+//   min-height: 40px;
 
-  :hover {
-    background-color: ${({ theme, disabled }) => (disabled ? theme.bg1 : darken(0.015, theme.bg1))};
-  }
-`
+//   :hover {
+//     background-color: ${({ theme, disabled }) => (disabled ? theme.bg1 : darken(0.015, theme.bg1))};
+//   }
+// `
 
-const RotatingArrow = styled(ChevronDown)<{ open?: boolean }>`
-  transform: ${({ open }) => (open ? 'rotate(180deg)' : 'none')};
-  transition: transform 0.1s linear;
-`
+// const RotatingArrow = styled(ChevronDown)<{ open?: boolean }>`
+//   transform: ${({ open }) => (open ? 'rotate(180deg)' : 'none')};
+//   transition: transform 0.1s linear;
+// `
 
 const StyledPolling = styled.div`
   display: flex;
@@ -124,8 +121,8 @@ export default function SwapDetailsDropdown({
   allowedSlippage,
 }: SwapDetailsInlineProps) {
   const theme = useTheme()
-  const { chainId } = useActiveWeb3React()
-  const [showDetails, setShowDetails] = useState(false)
+  // const { chainId } = useActiveWeb3React()
+  // const [showDetails, setShowDetails] = useState(false)
 
   return (
     <Wrapper>
@@ -155,7 +152,7 @@ export default function SwapDetailsDropdown({
                   </ResponsiveTooltipContainer>
                 }
                 placement="bottom"
-                disableHover={showDetails}
+                disableHover={false}
               >
                 <StyledInfoIcon color={trade ? theme.text3 : theme.bg3} />
               </MouseoverTooltipContent>

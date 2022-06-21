@@ -216,7 +216,7 @@ export default function Swap({ history }: RouteComponentProps) {
       TradeState.LOADING === tradeState || approvalState === ApprovalState.UNKNOWN,
       TradeState.SYNCING === tradeState,
     ],
-    [trade, tradeState, approvalState]
+    [tradeState, approvalState]
   )
   console.log(`NOT FOUND ${routeNotFound}`)
   console.log(`LOADING ${routeIsLoading}`)
