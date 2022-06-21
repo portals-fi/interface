@@ -46,7 +46,7 @@ export default function usePortalArguments({
             tokenOutSymbol: tokenOut.symbol,
             takerAddress: userAddress ?? ADDRESS_ZERO,
             slippagePercentage: slippagePercentage?.asFraction.toFixed(3),
-            validate: validate ?? false,
+            validate,
             partner: ADDRESS_ZERO,
           },
     [amount, tokenIn, tokenOut, userAddress, validate, isWindowVisible, slippagePercentage]

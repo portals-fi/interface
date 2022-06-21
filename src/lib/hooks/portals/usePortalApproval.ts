@@ -35,10 +35,10 @@ export function usePortalApprovalState(
   return useMemo(() => {
     if ((isLoading && !data) || isSyncing) {
       return { isApproved: true, state: TradeState.LOADING }
-    } else if (isError || !currentData) {
-      return { isApproved: false, state: TradeState.INVALID }
     } else if (currencyIn?.isNative) {
       return { isApproved: true, state: TradeState.VALID }
+    } else if (isError || !currentData) {
+      return { isApproved: false, state: TradeState.INVALID }
     } else {
       return {
         isApproved: !currentData.context.shouldApprove,

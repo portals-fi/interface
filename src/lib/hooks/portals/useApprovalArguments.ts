@@ -24,7 +24,7 @@ export default function useApprovalArguments({
         ? undefined
         : {
             amount: amount.quotient.toString(),
-            tokenInAddress: tokenIn.isNative ? ADDRESS_ZERO : tokenIn.wrapped.address,
+            tokenInAddress: tokenIn.wrapped.address,
             tokenInChainId: tokenIn.chainId,
             tokenOutAddress: tokenOut.isNative ? ADDRESS_ZERO : tokenOut.wrapped.address,
             tokenOutChainId: tokenOut.chainId,
