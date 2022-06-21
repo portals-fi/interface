@@ -218,9 +218,6 @@ export default function Swap({ history }: RouteComponentProps) {
     ],
     [tradeState, approvalState]
   )
-  console.log(`NOT FOUND ${routeNotFound}`)
-  console.log(`LOADING ${routeIsLoading}`)
-  console.log(`SYNCING ${routeIsSyncing}`)
   const priceImpact = useMemo(
     () => (routeIsSyncing ? undefined : computeFiatValuePriceImpact(fiatValueInput, fiatValueOutput)),
     [fiatValueInput, fiatValueOutput, routeIsSyncing]
