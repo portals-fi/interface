@@ -1,16 +1,14 @@
 // eslint-disable-next-line no-restricted-imports
 import { t, Trans } from '@lingui/macro'
 import { Percent } from '@uniswap/sdk-core'
-import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { useContext, useRef } from 'react'
+import { useRef } from 'react'
 import { Settings } from 'react-feather'
 import { Text } from 'rebass'
-import styled, { ThemeContext } from 'styled-components/macro'
+import styled from 'styled-components/macro'
 
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 import { useModalOpen, useToggleSettingsMenu } from '../../state/application/hooks'
 import { ApplicationModal } from '../../state/application/reducer'
-import { useClientSideRouter } from '../../state/user/hooks'
 import { AutoColumn } from '../Column'
 import TransactionSettings from '../TransactionSettings'
 
@@ -111,17 +109,17 @@ const MenuFlyout = styled.span`
 // `
 
 export default function SettingsTab({ placeholderSlippage }: { placeholderSlippage: Percent }) {
-  const { chainId } = useActiveWeb3React()
+  // const { chainId } = useActiveWeb3React()
 
   const node = useRef<HTMLDivElement>()
   const open = useModalOpen(ApplicationModal.SETTINGS)
   const toggle = useToggleSettingsMenu()
 
-  const theme = useContext(ThemeContext)
+  // const theme = useContext(ThemeContext)
 
   // const [expertMode, toggleExpertMode] = useExpertModeManager()
 
-  const [clientSideRouter, setClientSideRouter] = useClientSideRouter()
+  // const [clientSideRouter, setClientSideRouter] = useClientSideRouter()
 
   // show confirmation view before turning on
   // const [showConfirmation, setShowConfirmation] = useState(false)
