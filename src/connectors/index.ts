@@ -17,13 +17,13 @@ export enum Wallet {
   INJECTED = 'INJECTED',
   COINBASE_WALLET = 'COINBASE_WALLET',
   WALLET_CONNECT = 'WALLET_CONNECT',
-  FORTMATIC = 'FORTMATIC',
+  // FORTMATIC = 'FORTMATIC',
   NETWORK = 'NETWORK',
   GNOSIS_SAFE = 'GNOSIS_SAFE',
 }
 
 export const BACKFILLABLE_WALLETS = [Wallet.COINBASE_WALLET, Wallet.WALLET_CONNECT, Wallet.INJECTED]
-export const SELECTABLE_WALLETS = [...BACKFILLABLE_WALLETS, Wallet.FORTMATIC]
+export const SELECTABLE_WALLETS = [...BACKFILLABLE_WALLETS]
 
 function onError(error: Error) {
   console.debug(`web3-react error: ${error}`)
@@ -37,8 +37,8 @@ export function getWalletForConnector(connector: Connector) {
       return Wallet.COINBASE_WALLET
     case walletConnect:
       return Wallet.WALLET_CONNECT
-    case fortmatic:
-      return Wallet.FORTMATIC
+    // case fortmatic:
+    //   return Wallet.FORTMATIC
     case network:
       return Wallet.NETWORK
     case gnosisSafe:
@@ -56,8 +56,8 @@ export function getConnectorForWallet(wallet: Wallet) {
       return coinbaseWallet
     case Wallet.WALLET_CONNECT:
       return walletConnect
-    case Wallet.FORTMATIC:
-      return fortmatic
+    // case Wallet.FORTMATIC:
+    //   return fortmatic
     case Wallet.NETWORK:
       return network
     case Wallet.GNOSIS_SAFE:
@@ -73,8 +73,8 @@ function getHooksForWallet(wallet: Wallet) {
       return coinbaseWalletHooks
     case Wallet.WALLET_CONNECT:
       return walletConnectHooks
-    case Wallet.FORTMATIC:
-      return fortmaticHooks
+    // case Wallet.FORTMATIC:
+    //   return fortmaticHooks
     case Wallet.NETWORK:
       return networkHooks
     case Wallet.GNOSIS_SAFE:
