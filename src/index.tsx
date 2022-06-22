@@ -8,7 +8,7 @@ import { MulticallUpdater } from 'lib/state/multicall'
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 
 import Blocklist from './components/Blocklist'
 import Web3Provider from './components/Web3Provider'
@@ -45,7 +45,7 @@ function Updaters() {
 ReactDOM.render(
   <StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
+      <HashRouter>
         <LanguageProvider>
           <Web3Provider>
             <Blocklist>
@@ -59,7 +59,7 @@ ReactDOM.render(
             </Blocklist>
           </Web3Provider>
         </LanguageProvider>
-      </BrowserRouter>
+      </HashRouter>
     </Provider>
   </StrictMode>,
   document.getElementById('root')
