@@ -2,12 +2,9 @@ import Loader from 'components/Loader'
 import TopLevelModals from 'components/TopLevelModals'
 import ApeModeQueryParamReader from 'hooks/useApeModeQueryParamReader'
 import { Suspense } from 'react'
-import { useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
 import { Route, Switch } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import { useAnalyticsReporter } from '../components/analytics'
 import ErrorBoundary from '../components/ErrorBoundary'
 import Header from '../components/Header'
 import Polling from '../components/Header/Polling'
@@ -50,17 +47,17 @@ const Marginer = styled.div`
 `
 
 export default function App() {
-  const history = useHistory()
-  useAnalyticsReporter(useLocation())
+  // const history = useHistory()
+  // useAnalyticsReporter(useLocation())
 
-  useEffect(() => {
-    const unlisten = history.listen(() => {
-      window.scrollTo(0, 0)
-    })
-    return () => {
-      unlisten()
-    }
-  }, [history])
+  // useEffect(() => {
+  //   const unlisten = history.listen(() => {
+  //     window.scrollTo(0, 0)
+  //   })
+  //   return () => {
+  //     unlisten()
+  //   }
+  // }, [history])
 
   return (
     <ErrorBoundary>
