@@ -443,7 +443,7 @@ export default function Swap({ history }: RouteComponentProps) {
                 fiatValue={fiatValueInput ?? undefined}
                 onCurrencySelect={handleInputSelect}
                 otherCurrency={currencies[Field.OUTPUT]}
-                showCommonBases={true}
+                showCommonBases={false}
                 id="swap-currency-input"
                 loading={independentField === Field.OUTPUT && routeIsSyncing}
               />
@@ -468,7 +468,7 @@ export default function Swap({ history }: RouteComponentProps) {
                 currency={currencies[Field.OUTPUT] ?? null}
                 onCurrencySelect={handleOutputSelect}
                 otherCurrency={currencies[Field.INPUT]}
-                showCommonBases={true}
+                showCommonBases={false}
                 id="swap-currency-output"
                 loading={independentField === Field.INPUT && routeIsSyncing}
               />
