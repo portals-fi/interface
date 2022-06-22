@@ -9,6 +9,23 @@ export interface PriceResponse {
   tokens: { price: number }[]
 }
 
+export interface AccountResponse {
+  balances: {
+    name: string
+    symbol: string
+    addresses: {
+      [key: string]: string
+    }
+    decimals: number
+    balance: number
+    rawBalance: string
+  }[]
+}
+
+export interface AccountQueryResponse {
+  [key: string]: string
+}
+
 export interface ApprovalResponse {
   context: {
     network: string

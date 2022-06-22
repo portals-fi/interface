@@ -1,15 +1,15 @@
-import { Interface } from '@ethersproject/abi'
+import { skipToken } from '@reduxjs/toolkit/query/react'
 import { Currency, CurrencyAmount, Token } from '@uniswap/sdk-core'
-import ERC20ABI from 'abis/erc20.json'
-import { Erc20Interface } from 'abis/types/Erc20'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import JSBI from 'jsbi'
-import { useMultipleContractSingleData, useSingleContractMultipleData } from 'lib/hooks/multicall'
+import { useSingleContractMultipleData } from 'lib/hooks/multicall'
 import { useMemo } from 'react'
+import { useGetBalancesQuery } from 'state/portals/slice'
 
 import { nativeOnChain } from '../../constants/tokens'
 import { useInterfaceMulticall } from '../../hooks/useContract'
 import { isAddress } from '../../utils'
+import useAccountArguments from './portals/useAccountArguments'
 
 /**
  * Returns a map of the given addresses to their eventually consistent ETH balances.
@@ -46,8 +46,8 @@ export function useNativeCurrencyBalances(uncheckedAddresses?: (string | undefin
   )
 }
 
-const ERC20Interface = new Interface(ERC20ABI) as Erc20Interface
-const tokenBalancesGasRequirement = { gasRequired: 185_000 }
+// const ERC20Interface = new Interface(ERC20ABI) as Erc20Interface
+// const tokenBalancesGasRequirement = { gasRequired: 185_000 }
 
 /**
  * Returns a map of token addresses to their eventually consistent token balances for a single account.
@@ -60,23 +60,26 @@ export function useTokenBalancesWithLoadingIndicator(
     () => tokens?.filter((t?: Token): t is Token => isAddress(t?.address) !== false) ?? [],
     [tokens]
   )
-  const validatedTokenAddresses = useMemo(() => validatedTokens.map((vt) => vt.address), [validatedTokens])
+  const { chainId } = useActiveWeb3React()
+  // const validatedTokenAddresses = useMemo(() => validatedTokens.map((vt) => vt.address), [validatedTokens])
 
-  const balances = useMultipleContractSingleData(
-    validatedTokenAddresses,
-    ERC20Interface,
-    'balanceOf',
-    useMemo(() => [address], [address]),
-    tokenBalancesGasRequirement
-  )
+  // const balances = useMultipleContractSingleData(
+  //   validatedTokenAddresses,
+  //   ERC20Interface,
+  //   'balanceOf',
+  //   useMemo(() => [address], [address]),
+  //   tokenBalancesGasRequirement
+  // )
 
-  const anyLoading: boolean = useMemo(() => balances.some((callState) => callState.loading), [balances])
+  const args = useAccountArguments({ userAddress: address, chainId })
+
+  const { isLoading, data } = useGetBalancesQuery(args ?? skipToken)
 
   return useMemo(
     () => [
-      address && validatedTokens.length > 0
+      address && validatedTokens.length > 0 && Object.keys(data ?? {}).length > 0
         ? validatedTokens.reduce<{ [tokenAddress: string]: CurrencyAmount<Token> | undefined }>((memo, token, i) => {
-            const value = balances?.[i]?.result?.[0]
+            const value = data?.[token.address] ?? '0'
             const amount = value ? JSBI.BigInt(value.toString()) : undefined
             if (amount) {
               memo[token.address] = CurrencyAmount.fromRawAmount(token, amount)
@@ -84,9 +87,9 @@ export function useTokenBalancesWithLoadingIndicator(
             return memo
           }, {})
         : {},
-      anyLoading,
+      isLoading,
     ],
-    [address, validatedTokens, anyLoading, balances]
+    [address, validatedTokens, isLoading, data]
   )
 }
 

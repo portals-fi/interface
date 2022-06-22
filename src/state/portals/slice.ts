@@ -1,9 +1,17 @@
 import { createApi, fetchBaseQuery, FetchBaseQueryError } from '@reduxjs/toolkit/query/react'
 import { ChainId } from '@uniswap/smart-order-router'
+import { getAddress } from 'ethers/lib/utils'
 import ms from 'ms.macro'
 import qs from 'qs'
 
-import { ApprovalResponse, CHAIN_LOOKUP, PortalResponse, PriceResponse } from './types'
+import {
+  AccountQueryResponse,
+  AccountResponse,
+  ApprovalResponse,
+  CHAIN_LOOKUP,
+  PortalResponse,
+  PriceResponse,
+} from './types'
 
 type PortalArgs = {
   tokenInAddress: string
@@ -33,6 +41,11 @@ type ApprovalArgs = {
 type PriceArgs = {
   tokenAddress: string
   tokenChainId: ChainId
+}
+
+type AccountArgs = {
+  ownerAddress: string
+  chainId: ChainId
 }
 
 export const portalsApi = createApi({
@@ -78,8 +91,6 @@ export const portalsApi = createApi({
           })
           return { data: result.data as PortalResponse }
         } catch (e) {
-          // TODO: fall back to client-side quoter when auto router fails.
-          // deprecate 'legacy' v2/v3 routers first.
           return { error: e as FetchBaseQueryError }
         }
       },
@@ -112,8 +123,6 @@ export const portalsApi = createApi({
           })
           return { data: result.data as ApprovalResponse }
         } catch (e) {
-          // TODO: fall back to client-side quoter when auto router fails.
-          // deprecate 'legacy' v2/v3 routers first.
           return { error: e as FetchBaseQueryError }
         }
       },
@@ -142,8 +151,38 @@ export const portalsApi = createApi({
           const response = result.data as PriceResponse
           return { data: response.tokens[0].price }
         } catch (e) {
-          // TODO: fall back to client-side quoter when auto router fails.
-          // deprecate 'legacy' v2/v3 routers first.
+          return { error: e as FetchBaseQueryError }
+        }
+      },
+      keepUnusedDataFor: ms`1 minute`,
+      extraOptions: {
+        maxRetries: 0,
+      },
+    }),
+    getBalances: build.query<AccountQueryResponse, AccountArgs>({
+      async queryFn(args, _api, _extraOptions, fetch) {
+        const { ownerAddress, chainId } = args
+
+        let result
+        try {
+          const query = qs.stringify({
+            ownerAddress,
+          })
+          console.log('Fetching account data from Portals API')
+          result = await fetch({
+            url: `account/${CHAIN_LOOKUP[chainId]}?${query}`,
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json', // Your headers
+            },
+          })
+          const response = result.data as AccountResponse
+          return {
+            data: Object.fromEntries(
+              response.balances.map((t) => [getAddress(t.addresses[CHAIN_LOOKUP[chainId]]), t.rawBalance])
+            ),
+          }
+        } catch (e) {
           return { error: e as FetchBaseQueryError }
         }
       },
@@ -155,4 +194,4 @@ export const portalsApi = createApi({
   }),
 })
 
-export const { useGetPortalQuery, useGetApprovalQuery, useGetPriceQuery } = portalsApi
+export const { useGetPortalQuery, useGetApprovalQuery, useGetPriceQuery, useGetBalancesQuery } = portalsApi
