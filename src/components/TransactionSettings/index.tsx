@@ -1,12 +1,8 @@
 import { Trans } from '@lingui/macro'
 import { Percent } from '@uniswap/sdk-core'
-import { L2_CHAIN_IDS } from 'constants/chains'
-import { DEFAULT_DEADLINE_FROM_NOW } from 'constants/misc'
-import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import ms from 'ms.macro'
 import { darken } from 'polished'
 import { useContext, useState } from 'react'
-import { useSetUserSlippageTolerance, useUserSlippageTolerance, useUserTransactionTTL } from 'state/user/hooks'
+import { useSetUserSlippageTolerance, useUserSlippageTolerance } from 'state/user/hooks'
 import styled, { ThemeContext } from 'styled-components/macro'
 
 import { ThemedText } from '../../theme'
@@ -18,9 +14,9 @@ enum SlippageError {
   InvalidInput = 'InvalidInput',
 }
 
-enum DeadlineError {
-  InvalidInput = 'InvalidInput',
-}
+// enum DeadlineError {
+//   InvalidInput = 'InvalidInput',
+// }
 
 const FancyButton = styled.button`
   color: ${({ theme }) => theme.text1};
@@ -94,22 +90,22 @@ interface TransactionSettingsProps {
   placeholderSlippage: Percent // varies according to the context in which the settings dialog is placed
 }
 
-const THREE_DAYS_IN_SECONDS = ms`3 days` / 1000
+// const THREE_DAYS_IN_SECONDS = ms`3 days` / 1000
 
 export default function TransactionSettings({ placeholderSlippage }: TransactionSettingsProps) {
-  const { chainId } = useActiveWeb3React()
+  // const { chainId } = useActiveWeb3React()
   const theme = useContext(ThemeContext)
 
   const userSlippageTolerance = useUserSlippageTolerance()
   const setUserSlippageTolerance = useSetUserSlippageTolerance()
 
-  const [deadline, setDeadline] = useUserTransactionTTL()
+  // const [deadline, setDeadline] = useUserTransactionTTL()
 
   const [slippageInput, setSlippageInput] = useState('')
   const [slippageError, setSlippageError] = useState<SlippageError | false>(false)
 
-  const [deadlineInput, setDeadlineInput] = useState('')
-  const [deadlineError, setDeadlineError] = useState<DeadlineError | false>(false)
+  // const [deadlineInput, setDeadlineInput] = useState('')
+  // const [deadlineError, setDeadlineError] = useState<DeadlineError | false>(false)
 
   function parseSlippageInput(value: string) {
     // populate what the user typed and clear the error
@@ -135,29 +131,29 @@ export default function TransactionSettings({ placeholderSlippage }: Transaction
   const tooLow = userSlippageTolerance !== 'auto' && userSlippageTolerance.lessThan(new Percent(5, 10_000))
   const tooHigh = userSlippageTolerance !== 'auto' && userSlippageTolerance.greaterThan(new Percent(1, 100))
 
-  function parseCustomDeadline(value: string) {
-    // populate what the user typed and clear the error
-    setDeadlineInput(value)
-    setDeadlineError(false)
+  // function parseCustomDeadline(value: string) {
+  //   // populate what the user typed and clear the error
+  //   setDeadlineInput(value)
+  //   setDeadlineError(false)
 
-    if (value.length === 0) {
-      setDeadline(DEFAULT_DEADLINE_FROM_NOW)
-    } else {
-      try {
-        const parsed: number = Math.floor(Number.parseFloat(value) * 60)
-        if (!Number.isInteger(parsed) || parsed < 60 || parsed > THREE_DAYS_IN_SECONDS) {
-          setDeadlineError(DeadlineError.InvalidInput)
-        } else {
-          setDeadline(parsed)
-        }
-      } catch (error) {
-        console.error(error)
-        setDeadlineError(DeadlineError.InvalidInput)
-      }
-    }
-  }
+  //   if (value.length === 0) {
+  //     setDeadline(DEFAULT_DEADLINE_FROM_NOW)
+  //   } else {
+  //     try {
+  //       const parsed: number = Math.floor(Number.parseFloat(value) * 60)
+  //       if (!Number.isInteger(parsed) || parsed < 60 || parsed > THREE_DAYS_IN_SECONDS) {
+  //         setDeadlineError(DeadlineError.InvalidInput)
+  //       } else {
+  //         setDeadline(parsed)
+  //       }
+  //     } catch (error) {
+  //       console.error(error)
+  //       setDeadlineError(DeadlineError.InvalidInput)
+  //     }
+  //   }
+  // }
 
-  const showCustomDeadlineRow = Boolean(chainId && !L2_CHAIN_IDS.includes(chainId))
+  // const showCustomDeadlineRow = Boolean(chainId && !L2_CHAIN_IDS.includes(chainId))
 
   return (
     <AutoColumn gap="md">
@@ -229,7 +225,7 @@ export default function TransactionSettings({ placeholderSlippage }: Transaction
         ) : null}
       </AutoColumn>
 
-      {showCustomDeadlineRow && (
+      {/* {showCustomDeadlineRow && (
         <AutoColumn gap="sm">
           <RowFixed>
             <ThemedText.Black fontSize={14} fontWeight={400} color={theme.text2}>
@@ -263,7 +259,7 @@ export default function TransactionSettings({ placeholderSlippage }: Transaction
             </ThemedText.Body>
           </RowFixed>
         </AutoColumn>
-      )}
+      )} */}
     </AutoColumn>
   )
 }
