@@ -16,7 +16,8 @@ export function transformResponseToTrade<TTradeType extends TradeType>(
   }
   return new PortalsTrade({
     inputAmount: CurrencyAmount.fromRawAmount(inputCurrency, result.context.sellAmount),
-    outputAmount: CurrencyAmount.fromRawAmount(outputCurrency, result.context.minBuyAmount),
+    outputAmount: CurrencyAmount.fromRawAmount(outputCurrency, result.context.buyAmount),
+    minOutputAmount: CurrencyAmount.fromRawAmount(outputCurrency, result.context.minBuyAmount),
     tradeType,
     gasUseEstimateUSD,
     tx: {

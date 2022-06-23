@@ -53,6 +53,7 @@ export interface PortalResponse {
     intermediateToken: string
     buyToken: string
     minBuyAmount: string
+    buyAmount: string
     target: string
     partner: string
     value: string

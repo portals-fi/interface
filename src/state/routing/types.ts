@@ -153,7 +153,8 @@ export class PortalsTrade<TInput extends Currency, TOutput extends Currency, TTr
   private _priceImpact: Percent
 
   readonly tradeType: TTradeType
-  private _outputAmountOverride: CurrencyAmount<TOutput>
+  private _minOutputAmount: CurrencyAmount<TOutput>
+  private _outputAmount: CurrencyAmount<TOutput>
   private _inputAmount: CurrencyAmount<TInput>
   readonly inputCurrency: TInput
   readonly outputCurrency: TOutput
@@ -164,10 +165,12 @@ export class PortalsTrade<TInput extends Currency, TOutput extends Currency, TTr
     outputAmount,
     gasUseEstimateUSD,
     tx,
+    minOutputAmount,
   }: {
     tradeType: TTradeType
     inputAmount: CurrencyAmount<TInput>
     outputAmount: CurrencyAmount<TOutput>
+    minOutputAmount: CurrencyAmount<TOutput>
     gasUseEstimateUSD?: CurrencyAmount<Token> | undefined | null
     tx?: {
       data: string
@@ -180,7 +183,7 @@ export class PortalsTrade<TInput extends Currency, TOutput extends Currency, TTr
     // super()
     // super({ v2Routes: [], v3Routes: [new Route([new Pool()])], tradeType })
     this._inputAmount = inputAmount
-    this._outputAmountOverride = outputAmount
+    this._outputAmount = outputAmount
     this.tradeType = tradeType
     this.inputCurrency = inputAmount.currency
     this.outputCurrency = outputAmount.currency
@@ -188,6 +191,7 @@ export class PortalsTrade<TInput extends Currency, TOutput extends Currency, TTr
     this.gasUseEstimateUSD = gasUseEstimateUSD
     this._priceImpact = new Percent('1')
     this.tx = tx
+    this._minOutputAmount = minOutputAmount
   }
 
   public routes: IRoute<TInput, TOutput, Pair | Pool>[] = []
@@ -206,7 +210,7 @@ export class PortalsTrade<TInput extends Currency, TOutput extends Currency, TTr
     return this._inputAmount
   }
   get outputAmount(): CurrencyAmount<TOutput> {
-    return this._outputAmountOverride
+    return this._outputAmount
   }
   private _executionPrice: Price<TInput, TOutput>
   /**
@@ -221,7 +225,7 @@ export class PortalsTrade<TInput extends Currency, TOutput extends Currency, TTr
    * @returns The amount out
    */
   minimumAmountOut(slippageTolerance: Percent, amountOut?: CurrencyAmount<TOutput>): CurrencyAmount<TOutput> {
-    return this.outputAmount
+    return this._minOutputAmount
   }
   /**
    * Get the maximum amount in that can be spent via this trade for the given slippage tolerance

@@ -50,7 +50,7 @@ export default function usePortal<TTradeType extends TradeType>(
   })
 
   const { isLoading, isError, data, currentData } = useGetPortalQuery(portalQueryArgs ?? skipToken, {
-    pollingInterval: ms`15s`,
+    pollingInterval: ms`30s`,
     refetchOnFocus: true,
   })
 

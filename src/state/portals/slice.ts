@@ -94,7 +94,7 @@ export const portalsApi = createApi({
           return { error: e as FetchBaseQueryError }
         }
       },
-      keepUnusedDataFor: ms`10s`,
+      keepUnusedDataFor: ms`30s`,
       extraOptions: {
         maxRetries: 0,
       },
@@ -127,6 +127,7 @@ export const portalsApi = createApi({
         }
       },
       keepUnusedDataFor: ms`1 minute`,
+
       extraOptions: {
         maxRetries: 0,
       },
