@@ -3,6 +3,7 @@ import { Currency, CurrencyAmount, Price, Token } from '@uniswap/sdk-core'
 import { parseAmount } from '@uniswap/smart-order-router'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import tryParseCurrencyAmount from 'lib/utils/tryParseCurrencyAmount'
+import ms from 'ms.macro'
 import { useMemo, useRef } from 'react'
 import { useGetPriceQuery } from 'state/portals/slice'
 
@@ -31,7 +32,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
   const priceQueryArgs = currency
     ? { tokenAddress: currency.wrapped.address, tokenChainId: currency.chainId }
     : skipToken
-  const { currentData } = useGetPriceQuery(priceQueryArgs)
+  const { currentData } = useGetPriceQuery(priceQueryArgs, { pollingInterval: ms`30s`, refetchOnFocus: true })
   const stableAmount = useStablecoinAmountFromFiatValue(currentData?.toString())?.quotient
 
   const price = useMemo(() => {
