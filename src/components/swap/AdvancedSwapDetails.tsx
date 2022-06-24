@@ -7,7 +7,7 @@ import { SUPPORTED_GAS_ESTIMATE_CHAIN_IDS } from 'constants/chains'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useUSDCValue } from 'hooks/useUSDCPrice'
 import useNativeCurrency from 'lib/hooks/useNativeCurrency'
-import { useContext, useMemo } from 'react'
+import { useContext } from 'react'
 import { InterfaceTrade } from 'state/routing/types'
 import styled, { ThemeContext } from 'styled-components/macro'
 
@@ -58,14 +58,14 @@ export function AdvancedSwapDetails({
 
   const outputPrice = useUSDCValue(trade?.minimumAmountOut())
 
-  const { expectedOutputAmount } = useMemo(() => {
-    if (!trade) return { expectedOutputAmount: undefined, priceImpact: undefined }
-    const expectedOutputAmount = trade.outputAmount
+  // const { expectedOutputAmount } = useMemo(() => {
+  //   if (!trade) return { expectedOutputAmount: undefined, priceImpact: undefined }
+  //   const expectedOutputAmount = trade.outputAmount
 
-    // const realizedLpFeePercent = computeRealizedLPFeePercent(trade as unknown as Trade<Currency, Currency, TradeType>)
-    // const priceImpact = trade.priceImpact.subtract(realizedLpFeePercent)
-    return { expectedOutputAmount }
-  }, [trade])
+  //   // const realizedLpFeePercent = computeRealizedLPFeePercent(trade as unknown as Trade<Currency, Currency, TradeType>)
+  //   // const priceImpact = trade.priceImpact.subtract(realizedLpFeePercent)
+  //   return { expectedOutputAmount }
+  // }, [trade])
 
   return !trade ? null : (
     <StyledCard>

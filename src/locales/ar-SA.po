@@ -139,8 +139,8 @@ msgid "Add"
 msgstr "إضافة"
 
 #: src/components/AccountDetails/TransactionSummary.tsx
-msgid "Add <0/> and <1/> to Uniswap V2"
-msgstr "أضف <0 /> و <1 /> إلى Uniswap V2"
+msgid "Add <0/> and <1/> to Portals V2"
+msgstr "أضف <0 /> و <1 /> إلى Portals V2"
 
 #: src/components/vote/DelegateModal.tsx
 msgid "Add Delegate +"
@@ -196,8 +196,8 @@ msgid "Allow high price impact trades and skip the confirm screen. Use at your o
 msgstr "السماح بتداول تأثير الأسعار المرتفعة وتخطي شاشة التأكيد. استخدمه على مسؤوليتك الخاصة."
 
 #: src/pages/Swap/index.tsx
-msgid "Allow the Uniswap Protocol to use your {0}"
-msgstr "السماح لبروتوكول Uniswap باستخدام {0} الخاص بك"
+msgid "Allow the Portals Protocol to use your {0}"
+msgstr "السماح لبروتوكول Portals باستخدام {0} الخاص بك"
 
 #: src/pages/MigrateV2/MigrateV2Pair.tsx
 msgid "Allowed"
@@ -208,8 +208,8 @@ msgid "Amount"
 msgstr "المبلغ"
 
 #: src/utils/swapErrorToUserReadableMessage.tsx
-msgid "An error occurred when trying to execute this swap. You may need to increase your slippage tolerance. If that does not work, there may be an incompatibility with the token you are trading. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
-msgstr "حدث خطأ أثناء محاولة تنفيذ هذا التبادل. قد تحتاج إلى زيادة تحملك للانزلاق. إذا لم يفلح ذلك ، فقد يكون هناك عدم توافق مع الرمز الذي تتداوله. ملاحظة: رسوم النقل وإعادة الرموز المميزة غير متوافقة مع Uniswap V3."
+msgid "An error occurred when trying to execute this swap. You may need to increase your slippage tolerance. If that does not work, there may be an incompatibility with the token you are trading. Note: fee on transfer and rebase tokens are incompatible with Portals V3."
+msgstr "حدث خطأ أثناء محاولة تنفيذ هذا التبادل. قد تحتاج إلى زيادة تحملك للانزلاق. إذا لم يفلح ذلك ، فقد يكون هناك عدم توافق مع الرمز الذي تتداوله. ملاحظة: رسوم النقل وإعادة الرموز المميزة غير متوافقة مع Portals V3."
 
 #: src/components/earn/StakingModal.tsx
 #: src/pages/RemoveLiquidity/index.tsx
@@ -261,8 +261,8 @@ msgid "Are you sure?"
 msgstr "هل أنت متأكد؟"
 
 #: src/components/claim/ClaimModal.tsx
-msgid "As a member of the Uniswap community you may claim UNI to be used for voting and governance.<0/><1/><2>Read more about UNI</2>"
-msgstr "كعضو في مجتمع Uniswap ، يمكنك أن تدعي أن UNI تستخدم في التصويت والحكم. <0/><1/><2>اقرأ المزيد عن UNI</2>"
+msgid "As a member of the Portals community you may claim UNI to be used for voting and governance.<0/><1/><2>Read more about UNI</2>"
+msgstr "كعضو في مجتمع Portals ، يمكنك أن تدعي أن UNI تستخدم في التصويت والحكم. <0/><1/><2>اقرأ المزيد عن UNI</2>"
 
 #: src/pages/MigrateV2/MigrateV2Pair.tsx
 msgid "At least {0} {1} and {2} {3} will be refunded to your wallet due to selected price range."
@@ -329,7 +329,7 @@ msgid "By adding this list you are implicitly trusting that the data is correct.
 msgstr "بإضافة هذه القائمة فإنك تثق ضمنًا بأن البيانات صحيحة. ويمكن لأي شخص أن ينشئ قائمة، بما في ذلك إنشاء صيغ مزيفة من القوائم القائمة والقوائم التي تزعم أنها تمثل مشاريع لا تملك قائمة."
 
 #: src/components/WalletModal/index.tsx
-msgid "By connecting a wallet, you agree to Uniswap Labs’ <0>Terms of Service</0> and acknowledge that you have read and understand the Uniswap <1>Protocol Disclaimer</1>."
+msgid "By connecting a wallet, you agree to Portals’ <0>Terms of Service</0> and acknowledge that you have read and understand the Portals <1>Protocol Disclaimer</1>."
 msgstr "من خلال ربط المحفظة ، فإنك توافق على شروط الخدمة</0> <0>وتقر بأنك قد قرأت وفهمت إخلاء مسؤولية بروتوكول <1></1>."
 
 #: src/pages/Vote/styled.tsx
@@ -630,8 +630,8 @@ msgid "Deposit tokens to the {label} network."
 msgstr "إيداع الرموز في شبكة {label}"
 
 #: src/pages/Earn/index.tsx
-msgid "Deposit your Liquidity Provider tokens to receive UNI, the Uniswap protocol governance token."
-msgstr "قم بإيداع رموز موفر السيولة الخاصة بك لتلقي UNI، رمز بروتوكول Uniswap."
+msgid "Deposit your Liquidity Provider tokens to receive UNI, the Portals protocol governance token."
+msgstr "قم بإيداع رموز موفر السيولة الخاصة بك لتلقي UNI، رمز بروتوكول Portals."
 
 #: src/components/earn/UnstakingModal.tsx
 msgid "Deposited liquidity:"
@@ -678,8 +678,8 @@ msgid "Don’t see one of your v2 positions? <0>Import it.</0>"
 msgstr "لا ترى أحد مراكز v2 الخاصة بك؟ <0>قم باستيراده.</0>"
 
 #: src/components/vote/DelegateModal.tsx
-msgid "Earned UNI tokens represent voting shares in Uniswap governance."
-msgstr "تمثل رموز UNI التي تم الحصول عليها حصص التصويت في إدارة Uniswap."
+msgid "Earned UNI tokens represent voting shares in Portals governance."
+msgstr "تمثل رموز UNI التي تم الحصول عليها حصص التصويت في إدارة Portals."
 
 #: src/components/FeeSelector/index.tsx
 msgid "Edit"
@@ -784,12 +784,12 @@ msgid "Expired"
 msgstr "منتهي الصلاحية"
 
 #: src/pages/Pool/CTACards.tsx
-msgid "Explore Uniswap Analytics."
-msgstr "اكتشف تحليلات Uniswap."
+msgid "Explore Portals Analytics."
+msgstr "اكتشف تحليلات Portals."
 
 #: src/components/Popups/FailedNetworkSwitchPopup.tsx
-msgid "Failed to switch networks from the Uniswap Interface. In order to use Uniswap on {0}, you must change the network in your wallet."
-msgstr "فشل تبديل الشبكات من واجهة Uniswap. من أجل استخدام Uniswap على {0}، يجب عليك تغيير الشبكة في محفظتك."
+msgid "Failed to switch networks from the Portals Interface. In order to use Portals on {0}, you must change the network in your wallet."
+msgstr "فشل تبديل الشبكات من واجهة Portals. من أجل استخدام Portals على {0}، يجب عليك تغيير الشبكة في محفظتك."
 
 #: src/components/PositionPreview/index.tsx
 msgid "Fee Tier"
@@ -808,8 +808,8 @@ msgid "For"
 msgstr "لـ"
 
 #: src/pages/MigrateV2/index.tsx
-msgid "For each pool shown below, click migrate to remove your liquidity from Uniswap V2 and deposit it into Uniswap V3."
-msgstr "لكل مجموعة موضحة أدناه، انقر فوق ترحيل لإزالة السيولة الخاصة بك من Uniswap V2 وإيداعها في Uniswap V3."
+msgid "For each pool shown below, click migrate to remove your liquidity from Portals V2 and deposit it into Portals V3."
+msgstr "لكل مجموعة موضحة أدناه، انقر فوق ترحيل لإزالة السيولة الخاصة بك من Portals V2 وإيداعها في Portals V3."
 
 #: src/pages/Swap/index.tsx
 msgid "From"
@@ -1072,8 +1072,8 @@ msgid "Migrate V2 Liquidity"
 msgstr "ترحيل سيولة V2"
 
 #: src/pages/MigrateV2/index.tsx
-msgid "Migrate your liquidity tokens from Uniswap V2 to Uniswap V3."
-msgstr "نقل رموز السيولة الخاصة بك من Uniswap V2 إلى Uniswap V3."
+msgid "Migrate your liquidity tokens from Portals V2 to Portals V3."
+msgstr "نقل رموز السيولة الخاصة بك من Portals V2 إلى Portals V3."
 
 #: src/components/AccountDetails/TransactionSummary.tsx
 msgid "Migrate {0}/{1} liquidity to V3"
@@ -1360,8 +1360,8 @@ msgid "Read more about UNI"
 msgstr "اقرأ المزيد عن UNI"
 
 #: src/pages/Vote/Landing.tsx
-msgid "Read more about Uniswap governance"
-msgstr "اقرأ المزيد عن إدارة Uniswap"
+msgid "Read more about Portals governance"
+msgstr "اقرأ المزيد عن إدارة Portals"
 
 #: src/pages/Pool/v2.tsx
 msgid "Read more about providing liquidity"
@@ -1575,8 +1575,8 @@ msgid "Swapping {0} {1} for {2} {3}"
 msgstr "مبادلة {0} {1} مقابل {2} {3}"
 
 #: src/components/Popups/SurveyPopup.tsx
-msgid "Take a 10 minute survey to help us improve your experience in the Uniswap app."
-msgstr "شارك في استبيان مدته 10 دقائق لمساعدتنا على تحسين تجربتك في تطبيق Uniswap."
+msgid "Take a 10 minute survey to help us improve your experience in the Portals app."
+msgstr "شارك في استبيان مدته 10 دقائق لمساعدتنا على تحسين تجربتك في تطبيق Portals."
 
 #: src/components/WalletModal/index.tsx
 msgid "Tally"
@@ -1587,16 +1587,16 @@ msgid "Tell us what you think ↗"
 msgstr "قل لنا ما هو رأيك ↗"
 
 #: src/components/Popups/ClaimPopup.tsx
-msgid "Thanks for being part of the Uniswap community <0/>"
-msgstr "نشكرك على كونك جزءًا من مجتمع Uniswap <0/>"
+msgid "Thanks for being part of the Portals community <0/>"
+msgstr "نشكرك على كونك جزءًا من مجتمع Portals <0/>"
 
 #: src/components/FeeSelector/index.tsx
 msgid "The % you will earn in fees."
 msgstr "النسبة التي ستكسبها في الرسوم."
 
 #: src/utils/swapErrorToUserReadableMessage.tsx
-msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
-msgstr "الثابت Uniswap x*y=k لم يكن راضيًا عن المبادلة. يعني هذا عادةً أن أحد الرموز التي تقوم بتبادلها يتضمن سلوكًا مخصصًا عند النقل."
+msgid "The Portals invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
+msgstr "الثابت Portals x*y=k لم يكن راضيًا عن المبادلة. يعني هذا عادةً أن أحد الرموز التي تقوم بتبادلها يتضمن سلوكًا مخصصًا عند النقل."
 
 #: src/components/swap/AdvancedSwapDetails.tsx
 msgid "The amount you expect to receive at the current market price. You may receive less or more if the market price changes while your transaction is pending."
@@ -1611,8 +1611,8 @@ msgid "The app fetches on-chain data and constructs contract calls with an Infur
 msgstr "يجلب التطبيق البيانات على السلسلة وينشئ مكالمات تعاقدية باستخدام واجهة برمجة تطبيقات Infura."
 
 #: src/components/PrivacyPolicy/index.tsx
-msgid "The app fetches the optimal trade route from a Uniswap Labs server."
-msgstr "يجلب التطبيق المسار التجاري الأمثل من خادم Uniswap Labs."
+msgid "The app fetches the optimal trade route from a Portals server."
+msgstr "يجلب التطبيق المسار التجاري الأمثل من خادم Portals."
 
 #: src/components/PrivacyPolicy/index.tsx
 msgid "The app logs anonymized usage statistics in order to improve over time."
@@ -1667,8 +1667,8 @@ msgid "The output token cannot be transferred. There may be an issue with the ou
 msgstr "لا يمكن نقل رمز الإخراج. قد تكون هناك مشكلة في رمز الإخراج."
 
 #: src/utils/swapErrorToUserReadableMessage.tsx
-msgid "The output token cannot be transferred. There may be an issue with the output token. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
-msgstr "لا يمكن نقل رمز الإخراج. قد تكون هناك مشكلة في رمز الإخراج. ملاحظة: رسوم النقل وإعادة الرموز المميزة غير متوافقة مع Uniswap V3."
+msgid "The output token cannot be transferred. There may be an issue with the output token. Note: fee on transfer and rebase tokens are incompatible with Portals V3."
+msgstr "لا يمكن نقل رمز الإخراج. قد تكون هناك مشكلة في رمز الإخراج. ملاحظة: رسوم النقل وإعادة الرموز المميزة غير متوافقة مع Portals V3."
 
 #: src/components/Badge/RangeBadge.tsx
 msgid "The price of this pool is outside of your selected range. Your position is not currently earning fees."
@@ -1691,8 +1691,8 @@ msgid "There is no liquidity data."
 msgstr "لا توجد بيانات سيولة."
 
 #: src/components/ConnectedAccountBlocked/index.tsx
-msgid "This address is blocked on the Uniswap Labs interface because it is associated with one or more"
-msgstr "هذا العنوان محظور في واجهة Uniswap Labs لأنه مرتبط بواحد أو أكثر"
+msgid "This address is blocked on the Portals interface because it is associated with one or more"
+msgstr "هذا العنوان محظور في واجهة Portals لأنه مرتبط بواحد أو أكثر"
 
 #: src/components/PrivacyPolicy/index.tsx
 msgid "This app uses the following third-party APIs:"
@@ -1711,16 +1711,16 @@ msgid "This token doesn't appear on the active token list(s). Make sure this is 
 msgstr "لا يظهر هذا الرمز في قائمة (قوائم) الرموز النشطة. تأكد من أن هذا هو الرمز الذي تريد تداوله."
 
 #: src/components/SearchModal/BlockedToken.tsx
-msgid "This token is not supported in the Uniswap Labs app"
-msgstr "هذا الرمز المميز غير مدعوم في تطبيق Uniswap Labs"
+msgid "This token is not supported in the Portals app"
+msgstr "هذا الرمز المميز غير مدعوم في تطبيق Portals"
 
 #: src/pages/MigrateV2/MigrateV2Pair.tsx
 msgid "This tool will safely migrate your {0} liquidity to V3. The process is completely trustless thanks to the"
 msgstr "هذه الأداة سوف تنقل سيولتك {0} إلى V3. العملية غير موثوق بها تمامًا بسبب"
 
 #: src/utils/swapErrorToUserReadableMessage.tsx
-msgid "This transaction will not succeed due to price movement. Try increasing your slippage tolerance. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
-msgstr "لن تنجح هذه الصفقة بسبب حركة السعر. حاول زيادة تحملك للانزلاق. ملاحظة: رسوم النقل وإعادة الرموز المميزة غير متوافقة مع Uniswap V3."
+msgid "This transaction will not succeed due to price movement. Try increasing your slippage tolerance. Note: fee on transfer and rebase tokens are incompatible with Portals V3."
+msgstr "لن تنجح هذه الصفقة بسبب حركة السعر. حاول زيادة تحملك للانزلاق. ملاحظة: رسوم النقل وإعادة الرموز المميزة غير متوافقة مع Portals V3."
 
 #: src/utils/swapErrorToUserReadableMessage.tsx
 msgid "This transaction will not succeed either due to price movement or fee on transfer. Try increasing your slippage tolerance."
@@ -1813,8 +1813,8 @@ msgid "UNI has arrived"
 msgstr "وصل UNI"
 
 #: src/pages/Vote/Landing.tsx
-msgid "UNI tokens represent voting shares in Uniswap governance. You can vote on each proposal yourself or delegate your votes to a third party."
-msgstr "تمثل رموز UNI حصص التصويت في حوكمة Uniswap. يمكنك التصويت على كل اقتراح بنفسك أو تفويض أصواتك لطرف ثالث."
+msgid "UNI tokens represent voting shares in Portals governance. You can vote on each proposal yourself or delegate your votes to a third party."
+msgstr "تمثل رموز UNI حصص التصويت في حوكمة Portals. يمكنك التصويت على كل اقتراح بنفسك أو تفويض أصواتك لطرف ثالث."
 
 #: src/pages/RemoveLiquidity/index.tsx
 msgid "UNI {0}/{1} Burned"
@@ -1850,36 +1850,36 @@ msgid "Unexpected issue with estimating the gas. Please try again."
 msgstr "مشكلة غير متوقعة في تقدير الغاز. حاول مرة اخرى."
 
 #: src/pages/Vote/Landing.tsx
-msgid "Uniswap Governance"
+msgid "Portals Governance"
 msgstr "إدارة Uniswitp"
 
 #: src/components/PrivacyPolicy/index.tsx
-msgid "Uniswap Labs' Terms of Service"
-msgstr "شروط خدمة Uniswap Labs"
+msgid "Portals' Terms of Service"
+msgstr "شروط خدمة Portals"
 
 #: src/components/SwitchLocaleLink/index.tsx
-msgid "Uniswap available in: <0>{0}</0>"
-msgstr "Uniswap متاح في: <0>{0}</0>"
+msgid "Portals available in: <0>{0}</0>"
+msgstr "Portals متاح في: <0>{0}</0>"
 
 #: src/components/vote/ProposalEmptyState.tsx
-msgid "Uniswap governance is only available on Layer 1. Switch your network to Ethereum Mainnet to view Proposals and Vote."
-msgstr "حوكمة Uniswap متاحة فقط في الطبقة 1. قم بتبديل شبكتك إلى Ethereum Mainnet لعرض الاقتراحات والتصويت."
+msgid "Portals governance is only available on Layer 1. Switch your network to Ethereum Mainnet to view Proposals and Vote."
+msgstr "حوكمة Portals متاحة فقط في الطبقة 1. قم بتبديل شبكتك إلى Ethereum Mainnet لعرض الاقتراحات والتصويت."
 
 #: src/pages/Earn/index.tsx
-msgid "Uniswap liquidity mining"
-msgstr "تعدين سيولة Uniswap"
+msgid "Portals liquidity mining"
+msgstr "تعدين سيولة Portals"
 
 #: src/pages/MigrateV2/MigrateV2Pair.tsx
-msgid "Uniswap migration contract↗"
-msgstr "عقد ترحيل Uniswap ↗"
+msgid "Portals migration contract↗"
+msgstr "عقد ترحيل Portals ↗"
 
 #: src/components/SearchModal/TokenImportCard.tsx
 msgid "Unknown Source"
 msgstr "مصدر مجهول"
 
 #: src/utils/swapErrorToUserReadableMessage.tsx
-msgid "Unknown error{0}. Try increasing your slippage tolerance. Note: fee on transfer and rebase tokens are incompatible with Uniswap V3."
-msgstr "خطأ غير معروف{0}. حاول زيادة تحملك للانزلاق. ملاحظة: رسوم النقل وإعادة الرموز المميزة غير متوافقة مع Uniswap V3."
+msgid "Unknown error{0}. Try increasing your slippage tolerance. Note: fee on transfer and rebase tokens are incompatible with Portals V3."
+msgstr "خطأ غير معروف{0}. حاول زيادة تحملك للانزلاق. ملاحظة: رسوم النقل وإعادة الرموز المميزة غير متوافقة مع Portals V3."
 
 #: src/pages/Vote/Landing.tsx
 #: src/pages/Vote/VotePage.tsx
@@ -1925,8 +1925,8 @@ msgid "Update list"
 msgstr "قائمة التحديث"
 
 #: src/components/Settings/index.tsx
-msgid "Use the Uniswap Labs API to get faster quotes."
-msgstr "استخدم Uniswap Labs API للحصول على عروض أسعار أسرع."
+msgid "Use the Portals API to get faster quotes."
+msgstr "استخدم Portals API للحصول على عروض أسعار أسرع."
 
 #: src/components/claim/ClaimModal.tsx
 msgid "User"
@@ -2105,8 +2105,8 @@ msgid "You are creating a pool"
 msgstr "أنت تقوم بإنشاء مجموعة"
 
 #: src/pages/MigrateV2/MigrateV2Pair.tsx
-msgid "You are the first liquidity provider for this Uniswap V3 pool. Your liquidity will migrate at the current {0} price."
-msgstr "أنت أول موفر للسيولة لمجموعة Uniswap V3 هذا. ستنتقل السيولة الخاصة بك بسعر {0} الحالي."
+msgid "You are the first liquidity provider for this Portals V3 pool. Your liquidity will migrate at the current {0} price."
+msgstr "أنت أول موفر للسيولة لمجموعة Portals V3 هذا. ستنتقل السيولة الخاصة بك بسعر {0} الحالي."
 
 #: src/pages/AddLiquidityV2/index.tsx
 msgid "You are the first liquidity provider."
@@ -2145,16 +2145,16 @@ msgid "You must connect an account."
 msgstr "يجب عليك توصيل حساب."
 
 #: src/pages/Swap/index.tsx
-msgid "You must give the Uniswap smart contracts permission to use your {0}. You only have to do this once per token."
-msgstr "يجب عليك منح العقود الذكية لـ Uniswap الإذن لاستخدام {0}الخاص بك. يجب عليك القيام بذلك مرة واحدة فقط لكل رمز."
+msgid "You must give the Portals smart contracts permission to use your {0}. You only have to do this once per token."
+msgstr "يجب عليك منح العقود الذكية لـ Portals الإذن لاستخدام {0}الخاص بك. يجب عليك القيام بذلك مرة واحدة فقط لكل رمز."
 
 #: src/pages/CreateProposal/index.tsx
 msgid "You must have {formattedProposalThreshold} votes to submit a proposal"
 msgstr "يجب أن يكون لديك {formattedProposalThreshold} أصوات لتقديم اقتراح"
 
 #: src/pages/MigrateV2/MigrateV2Pair.tsx
-msgid "You should only deposit liquidity into Uniswap V3 at a price you believe is correct. <0/>If the price seems incorrect, you can either make a swap to move the price or wait for someone else to do so."
-msgstr "يجب عليك إيداع السيولة فقط في Uniswap V3 بسعر تعتقد أنه صحيح. <0/>إذا بدا السعر غير صحيح، يمكنك إما مقايضة لتحريك السعر أو الانتظار حتى يقوم شخص آخر بذلك."
+msgid "You should only deposit liquidity into Portals V3 at a price you believe is correct. <0/>If the price seems incorrect, you can either make a swap to move the price or wait for someone else to do so."
+msgstr "يجب عليك إيداع السيولة فقط في Portals V3 بسعر تعتقد أنه صحيح. <0/>إذا بدا السعر غير صحيح، يمكنك إما مقايضة لتحريك السعر أو الانتظار حتى يقوم شخص آخر بذلك."
 
 #: src/pages/RemoveLiquidity/V3.tsx
 msgid "You will also collect fees earned from this position."

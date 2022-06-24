@@ -110,7 +110,7 @@ export const [coinbaseWallet, coinbaseWalletHooks] = initializeConnector<Coinbas
       actions,
       options: {
         url: INFURA_NETWORK_URLS[SupportedChainId.MAINNET],
-        appName: 'Uniswap',
+        appName: 'Portals',
         appLogoUrl: UNISWAP_LOGO_URL,
       },
       onError,
