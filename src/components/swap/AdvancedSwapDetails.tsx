@@ -1,21 +1,20 @@
 import { Trans } from '@lingui/macro'
-import { Trade } from '@uniswap/router-sdk'
 import { Currency, Percent, TradeType } from '@uniswap/sdk-core'
 import Card from 'components/Card'
+import { FiatValue } from 'components/CurrencyInputPanel/FiatValue'
 import { LoadingRows } from 'components/Loader/styled'
 import { SUPPORTED_GAS_ESTIMATE_CHAIN_IDS } from 'constants/chains'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import { useUSDCValue } from 'hooks/useUSDCPrice'
 import useNativeCurrency from 'lib/hooks/useNativeCurrency'
 import { useContext, useMemo } from 'react'
 import { InterfaceTrade } from 'state/routing/types'
 import styled, { ThemeContext } from 'styled-components/macro'
 
-import { Separator, ThemedText } from '../../theme'
-import { computeRealizedLPFeePercent } from '../../utils/prices'
+import { ThemedText } from '../../theme'
 import { AutoColumn } from '../Column'
 import { RowBetween, RowFixed } from '../Row'
 import { MouseoverTooltip } from '../Tooltip'
-import FormattedPriceImpact from './FormattedPriceImpact'
 
 const StyledCard = styled(Card)`
   padding: 0;
@@ -57,18 +56,21 @@ export function AdvancedSwapDetails({
   const { chainId } = useActiveWeb3React()
   const nativeCurrency = useNativeCurrency()
 
-  const { expectedOutputAmount, priceImpact } = useMemo(() => {
+  const outputPrice = useUSDCValue(trade?.minimumAmountOut())
+
+  const { expectedOutputAmount } = useMemo(() => {
     if (!trade) return { expectedOutputAmount: undefined, priceImpact: undefined }
     const expectedOutputAmount = trade.outputAmount
-    const realizedLpFeePercent = computeRealizedLPFeePercent(trade as unknown as Trade<Currency, Currency, TradeType>)
-    const priceImpact = trade.priceImpact.subtract(realizedLpFeePercent)
-    return { expectedOutputAmount, priceImpact }
+
+    // const realizedLpFeePercent = computeRealizedLPFeePercent(trade as unknown as Trade<Currency, Currency, TradeType>)
+    // const priceImpact = trade.priceImpact.subtract(realizedLpFeePercent)
+    return { expectedOutputAmount }
   }, [trade])
 
   return !trade ? null : (
     <StyledCard>
       <AutoColumn gap="8px">
-        <RowBetween>
+        {/* <RowBetween>
           <RowFixed>
             <MouseoverTooltip
               text={
@@ -91,8 +93,8 @@ export function AdvancedSwapDetails({
                 : '-'}
             </ThemedText.Black>
           </TextWithLoadingPlaceholder>
-        </RowBetween>
-        <RowBetween>
+        </RowBetween> */}
+        {/* <RowBetween>
           <RowFixed>
             <MouseoverTooltip
               text={<Trans>The impact your trade has on the market price of this pool.</Trans>}
@@ -108,8 +110,8 @@ export function AdvancedSwapDetails({
               <FormattedPriceImpact priceImpact={priceImpact} />
             </ThemedText.Black>
           </TextWithLoadingPlaceholder>
-        </RowBetween>
-        <Separator />
+        </RowBetween> */}
+        {/* <Separator /> */}
         <RowBetween>
           <RowFixed style={{ marginRight: '20px' }}>
             <MouseoverTooltip
@@ -127,7 +129,7 @@ export function AdvancedSwapDetails({
                 ) : (
                   <Trans>Maximum sent</Trans>
                 )}{' '}
-                <Trans>after slippage</Trans> ({allowedSlippage.toFixed(2)}%)
+                <Trans>after fees and slippage</Trans> ({allowedSlippage.toFixed(2)}%)
               </ThemedText.SubHeader>
             </MouseoverTooltip>
           </RowFixed>
@@ -136,6 +138,8 @@ export function AdvancedSwapDetails({
               {trade.tradeType === TradeType.EXACT_INPUT
                 ? `${trade.minimumAmountOut(allowedSlippage).toSignificant(6)} ${trade.outputAmount.currency.symbol}`
                 : `${trade.maximumAmountIn(allowedSlippage).toSignificant(6)} ${trade.inputAmount.currency.symbol}`}
+              {' \n '}
+              <FiatValue fiatValue={outputPrice} />
             </ThemedText.Black>
           </TextWithLoadingPlaceholder>
         </RowBetween>

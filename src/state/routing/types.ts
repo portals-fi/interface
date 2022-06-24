@@ -101,19 +101,19 @@ export interface InterfaceTrade<TInput extends Currency, TOutput extends Currenc
    * @param slippageTolerance The tolerance of unfavorable slippage from the execution price of this trade
    * @returns The amount out
    */
-  minimumAmountOut(slippageTolerance: Percent, amountOut?: CurrencyAmount<TOutput>): CurrencyAmount<TOutput>
+  minimumAmountOut(slippageTolerance?: Percent, amountOut?: CurrencyAmount<TOutput>): CurrencyAmount<TOutput>
   /**
    * Get the maximum amount in that can be spent via this trade for the given slippage tolerance
    * @param slippageTolerance The tolerance of unfavorable slippage from the execution price of this trade
    * @returns The amount in
    */
-  maximumAmountIn(slippageTolerance: Percent, amountIn?: CurrencyAmount<TInput>): CurrencyAmount<TInput>
+  maximumAmountIn(slippageTolerance?: Percent, amountIn?: CurrencyAmount<TInput>): CurrencyAmount<TInput>
   /**
    * Return the execution price after accounting for slippage tolerance
    * @param slippageTolerance the allowed tolerated slippage
    * @returns The execution price
    */
-  worstExecutionPrice(slippageTolerance: Percent): Price<TInput, TOutput>
+  worstExecutionPrice(slippageTolerance?: Percent): Price<TInput, TOutput>
   // static fromRoutes<TInput extends Currency, TOutput extends Currency, TTradeType extends TradeType>(v2Routes: {
   //     routev2: V2RouteSDK<TInput, TOutput>;
   //     amount: TTradeType extends TradeType.EXACT_INPUT ? CurrencyAmount<TInput> : CurrencyAmount<TOutput>;
