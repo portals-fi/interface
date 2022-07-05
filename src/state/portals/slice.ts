@@ -179,9 +179,7 @@ export const portalsApi = createApi({
           })
           const response = result.data as AccountResponse
           return {
-            data: Object.fromEntries(
-              response.balances.map((t) => [getAddress(t.addresses[CHAIN_LOOKUP[chainId]]), t.rawBalance])
-            ),
+            data: Object.fromEntries(response.balances.map((t) => [getAddress(t.address), t.rawBalance])),
           }
         } catch (e) {
           return { error: e as FetchBaseQueryError }

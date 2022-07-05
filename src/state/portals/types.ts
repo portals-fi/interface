@@ -13,9 +13,7 @@ export interface AccountResponse {
   balances: {
     name: string
     symbol: string
-    addresses: {
-      [key: string]: string
-    }
+    address: string
     decimals: number
     balance: number
     rawBalance: string
