@@ -16,6 +16,12 @@ export enum SupportedChainId {
 
   POLYGON = 137,
   POLYGON_MUMBAI = 80001,
+
+  FANTOM = 250,
+
+  AVALANCHE = 43114,
+
+  BSC = 56,
 }
 
 export const CHAIN_IDS_TO_NAMES = {
@@ -30,6 +36,9 @@ export const CHAIN_IDS_TO_NAMES = {
   [SupportedChainId.ARBITRUM_RINKEBY]: 'arbitrum_rinkeby',
   [SupportedChainId.OPTIMISM]: 'optimism',
   [SupportedChainId.OPTIMISTIC_KOVAN]: 'optimistic_kovan',
+  [SupportedChainId.FANTOM]: 'fantom',
+  [SupportedChainId.AVALANCHE]: 'avalanche',
+  [SupportedChainId.BSC]: 'bsc',
 }
 
 /**
@@ -42,8 +51,21 @@ export const ALL_SUPPORTED_CHAIN_IDS: SupportedChainId[] = Object.values(Support
 export const SUPPORTED_GAS_ESTIMATE_CHAIN_IDS = [
   SupportedChainId.MAINNET,
   SupportedChainId.POLYGON,
+  SupportedChainId.FANTOM,
+  SupportedChainId.BSC,
+  SupportedChainId.AVALANCHE,
   SupportedChainId.OPTIMISM,
   SupportedChainId.ARBITRUM_ONE,
+]
+
+/**
+ * Array of supported non-Ether L1s (i.e. dont use ETH as network token)
+ */
+export const NON_ETHER_CHAIN_IDS = [
+  SupportedChainId.BSC,
+  SupportedChainId.FANTOM,
+  SupportedChainId.POLYGON,
+  SupportedChainId.AVALANCHE,
 ]
 
 /**
@@ -66,6 +88,9 @@ export const L1_CHAIN_IDS = [
   SupportedChainId.KOVAN,
   SupportedChainId.POLYGON,
   SupportedChainId.POLYGON_MUMBAI,
+  SupportedChainId.FANTOM,
+  SupportedChainId.AVALANCHE,
+  SupportedChainId.BSC,
 ] as const
 
 export type SupportedL1ChainId = typeof L1_CHAIN_IDS[number]

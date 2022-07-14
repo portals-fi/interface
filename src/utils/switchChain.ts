@@ -24,6 +24,12 @@ function getRpcUrls(chainId: SupportedChainId): [string] {
       return ['https://polygon-rpc.com/']
     case SupportedChainId.POLYGON_MUMBAI:
       return ['https://rpc-endpoints.superfluid.dev/mumbai']
+    case SupportedChainId.FANTOM:
+      return ['https://rpc.fantom.network']
+    case SupportedChainId.AVALANCHE:
+      return [`https://api.avax.network/ext/bc/C/rpc`]
+    case SupportedChainId.BSC:
+      return [`https://bsc-dataseed2.binance.org`]
     default:
   }
   // Our API-keyed URLs will fail security checks when used with external wallets.

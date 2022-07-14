@@ -2,7 +2,7 @@ import { Currency, Ether, NativeCurrency, Token, WETH9 } from '@uniswap/sdk-core
 import invariant from 'tiny-invariant'
 
 import { UNI_ADDRESS } from './addresses'
-import { SupportedChainId } from './chains'
+import { NON_ETHER_CHAIN_IDS, SupportedChainId } from './chains'
 
 export const USDC_MAINNET = new Token(
   SupportedChainId.MAINNET,
@@ -81,6 +81,28 @@ export const USDC_POLYGON_MUMBAI = new Token(
   'USDC',
   'USD//C'
 )
+export const USDC_FANTOM = new Token(
+  SupportedChainId.FANTOM,
+  '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75',
+  6,
+  'USDC',
+  'USD//C'
+)
+export const USDC_BSC = new Token(
+  SupportedChainId.BSC,
+  '0x672147dD47674757C457eB155BAA382cc10705Dd',
+  6,
+  'USDC',
+  'USD//C'
+)
+
+export const USDC_AVALANCHE = new Token(
+  SupportedChainId.BSC,
+  '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
+  6,
+  'USDC',
+  'USD//C'
+)
 
 export const AMPL = new Token(
   SupportedChainId.MAINNET,
@@ -122,6 +144,9 @@ export const USDC: { [chainId in SupportedChainId]: Token } = {
   [SupportedChainId.RINKEBY]: USDC_RINKEBY,
   [SupportedChainId.KOVAN]: USDC_KOVAN,
   [SupportedChainId.ROPSTEN]: USDC_ROPSTEN,
+  [SupportedChainId.FANTOM]: USDC_FANTOM,
+  [SupportedChainId.BSC]: USDC_BSC,
+  [SupportedChainId.AVALANCHE]: USDC_AVALANCHE,
 }
 export const DAI_POLYGON = new Token(
   SupportedChainId.POLYGON,
@@ -316,27 +341,49 @@ export const WRAPPED_NATIVE_CURRENCY: { [chainId: number]: Token | undefined } =
     'WMATIC',
     'Wrapped MATIC'
   ),
+  [SupportedChainId.AVALANCHE]: new Token(
+    SupportedChainId.AVALANCHE,
+    '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7',
+    18,
+    'WAVAX',
+    'Wrapped AVAX'
+  ),
+  [SupportedChainId.BSC]: new Token(
+    SupportedChainId.BSC,
+    '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+    18,
+    'WBNB',
+    'Wrapped BNB'
+  ),
+  [SupportedChainId.FANTOM]: new Token(
+    SupportedChainId.FANTOM,
+    '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83',
+    18,
+    'WFTM',
+    'Wrapped FTM'
+  ),
 }
 
-function isMatic(chainId: number): chainId is SupportedChainId.POLYGON | SupportedChainId.POLYGON_MUMBAI {
-  return chainId === SupportedChainId.POLYGON_MUMBAI || chainId === SupportedChainId.POLYGON
+function isNonEther(chainId: number): boolean {
+  return NON_ETHER_CHAIN_IDS.includes(chainId)
 }
 
-class MaticNativeCurrency extends NativeCurrency {
+class NonEtherNativeCurrency extends NativeCurrency {
   equals(other: Currency): boolean {
     return other.isNative && other.chainId === this.chainId
   }
 
   get wrapped(): Token {
-    if (!isMatic(this.chainId)) throw new Error('Not matic')
+    if (!isNonEther(this.chainId)) throw new Error('Not non-ether')
     const wrapped = WRAPPED_NATIVE_CURRENCY[this.chainId]
     invariant(wrapped instanceof Token)
     return wrapped
   }
 
   public constructor(chainId: number) {
-    if (!isMatic(chainId)) throw new Error('Not matic')
-    super(chainId, 18, 'MATIC', 'Polygon Matic')
+    if (!isNonEther(chainId)) throw new Error('Not non-ether')
+    const chain = WRAPPED_NATIVE_CURRENCY[chainId]
+    super(chainId, chain?.decimals ?? 18, chain?.symbol, chain?.name)
   }
 }
 
@@ -358,8 +405,8 @@ const cachedNativeCurrency: { [chainId: number]: NativeCurrency } = {}
 export function nativeOnChain(chainId: number): NativeCurrency {
   return (
     cachedNativeCurrency[chainId] ??
-    (cachedNativeCurrency[chainId] = isMatic(chainId)
-      ? new MaticNativeCurrency(chainId)
+    (cachedNativeCurrency[chainId] = isNonEther(chainId)
+      ? new NonEtherNativeCurrency(chainId)
       : ExtendedEther.onChain(chainId))
   )
 }
@@ -377,5 +424,8 @@ export const TOKEN_SHORTHANDS: { [shorthand: string]: { [chainId in SupportedCha
     [SupportedChainId.RINKEBY]: USDC_RINKEBY.address,
     [SupportedChainId.KOVAN]: USDC_KOVAN.address,
     [SupportedChainId.ROPSTEN]: USDC_ROPSTEN.address,
+    [SupportedChainId.FANTOM]: USDC_FANTOM.address,
+    [SupportedChainId.BSC]: USDC_BSC.address,
+    [SupportedChainId.AVALANCHE]: USDC_AVALANCHE.address,
   },
 }

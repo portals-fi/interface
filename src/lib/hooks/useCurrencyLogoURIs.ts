@@ -1,10 +1,13 @@
 import { Currency } from '@uniswap/sdk-core'
+import AavaxLogo from 'assets/images/avax-logo.webp'
+import BscLogo from 'assets/images/bnb-logo.webp'
 import { SupportedChainId } from 'constants/chains'
 import useHttpLocations from 'hooks/useHttpLocations'
 import { useMemo } from 'react'
 import { WrappedTokenInfo } from 'state/lists/wrappedTokenInfo'
 
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
+import FantomLogo from '../../assets/images/fantom-logo.webp'
 import MaticLogo from '../../assets/svg/matic-token-icon.svg'
 
 type Network = 'ethereum' | 'arbitrum' | 'optimism'
@@ -27,6 +30,12 @@ function getNativeLogoURI(chainId: SupportedChainId = SupportedChainId.MAINNET):
     case SupportedChainId.POLYGON_MUMBAI:
     case SupportedChainId.POLYGON:
       return MaticLogo
+    case SupportedChainId.FANTOM:
+      return FantomLogo
+    case SupportedChainId.AVALANCHE:
+      return AavaxLogo
+    case SupportedChainId.BSC:
+      return BscLogo
     default:
       return EthereumLogo
   }

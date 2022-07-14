@@ -163,6 +163,15 @@ export const COMMON_BASES: ChainCurrencyList = {
     WRAPPED_NATIVE_CURRENCY[SupportedChainId.POLYGON_MUMBAI] as Token,
     WETH_POLYGON_MUMBAI,
   ],
+  [SupportedChainId.BSC]: [nativeOnChain(SupportedChainId.BSC), WRAPPED_NATIVE_CURRENCY[SupportedChainId.BSC] as Token],
+  [SupportedChainId.FANTOM]: [
+    nativeOnChain(SupportedChainId.FANTOM),
+    WRAPPED_NATIVE_CURRENCY[SupportedChainId.FANTOM] as Token,
+  ],
+  [SupportedChainId.AVALANCHE]: [
+    nativeOnChain(SupportedChainId.AVALANCHE),
+    WRAPPED_NATIVE_CURRENCY[SupportedChainId.AVALANCHE] as Token,
+  ],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend

@@ -24,4 +24,7 @@ export const INFURA_NETWORK_URLS: { [key in SupportedChainId]: string } = {
   [SupportedChainId.ARBITRUM_RINKEBY]: `https://arbitrum-rinkeby.infura.io/v3/${INFURA_KEY}`,
   [SupportedChainId.POLYGON]: `https://polygon-mainnet.infura.io/v3/${INFURA_KEY}`,
   [SupportedChainId.POLYGON_MUMBAI]: `https://polygon-mumbai.infura.io/v3/${INFURA_KEY}`,
+  [SupportedChainId.AVALANCHE]: `https://api.avax.network/ext/bc/C/rpc`,
+  [SupportedChainId.BSC]: `https://bsc-dataseed2.binance.org`,
+  [SupportedChainId.FANTOM]: `https://rpc.fantom.network`,
 }
