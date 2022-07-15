@@ -7,6 +7,19 @@ import { SupportedChainId } from './chains'
 type AddressMap = { [chainId: number]: string }
 
 export const UNI_ADDRESS: AddressMap = constructSameAddressMap('0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984')
+export const MULTICALL3_ADDRESS: AddressMap = {
+  ...constructSameAddressMap('0xcA11bde05977b3631167028862bE2a173976CA11', [
+    SupportedChainId.OPTIMISTIC_KOVAN,
+    SupportedChainId.OPTIMISM,
+    SupportedChainId.POLYGON_MUMBAI,
+    SupportedChainId.POLYGON,
+    SupportedChainId.ARBITRUM_ONE,
+    SupportedChainId.ARBITRUM_RINKEBY,
+    SupportedChainId.AVALANCHE,
+    SupportedChainId.FANTOM,
+    SupportedChainId.BSC,
+  ]),
+}
 export const MULTICALL_ADDRESS: AddressMap = {
   ...constructSameAddressMap('0x1F98415757620B543A52E61c46B32eB19261F984', [
     SupportedChainId.OPTIMISTIC_KOVAN,
@@ -16,6 +29,9 @@ export const MULTICALL_ADDRESS: AddressMap = {
   ]),
   [SupportedChainId.ARBITRUM_ONE]: '0xadF885960B47eA2CD9B55E6DAc6B42b7Cb2806dB',
   [SupportedChainId.ARBITRUM_RINKEBY]: '0xa501c031958F579dB7676fF1CE78AD305794d579',
+  [SupportedChainId.AVALANCHE]: '0xed472F3ccD91CA418013C5C177c9bdeDEDBc09B4',
+  [SupportedChainId.BSC]: '0x64f3877ce3dd803abf4c6c5beeba56be69808062',
+  [SupportedChainId.FANTOM]: '0xf9B0F866C276B68407A1CCAB6fBd5332Ed3ac643',
 }
 export const V2_FACTORY_ADDRESSES: AddressMap = constructSameAddressMap(V2_FACTORY_ADDRESS)
 

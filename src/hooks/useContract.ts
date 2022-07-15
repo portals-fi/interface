@@ -20,6 +20,7 @@ import {
   ARGENT_WALLET_DETECTOR_ADDRESS,
   ENS_REGISTRAR_ADDRESSES,
   MULTICALL_ADDRESS,
+  MULTICALL3_ADDRESS,
   NONFUNGIBLE_POSITION_MANAGER_ADDRESSES,
   QUOTER_ADDRESSES,
   TICK_LENS_ADDRESSES,
@@ -33,12 +34,14 @@ import { NonfungiblePositionManager, Quoter, TickLens, UniswapInterfaceMulticall
 import { V3Migrator } from 'types/v3/V3Migrator'
 
 import { getContract } from '../utils'
+import Multicall from './Multicall.json'
 
 const { abi: IUniswapV2PairABI } = IUniswapV2PairJson
 const { abi: IUniswapV2Router02ABI } = IUniswapV2Router02Json
 const { abi: QuoterABI } = QuoterJson
 const { abi: TickLensABI } = TickLensJson
 const { abi: MulticallABI } = UniswapInterfaceMulticallJson
+const { abi: Multicall3ABI } = Multicall
 const { abi: NFTPositionManagerABI } = NonfungiblePositionManagerJson
 const { abi: V2MigratorABI } = V3MigratorJson
 
@@ -120,6 +123,10 @@ export function useV2RouterContract(): Contract | null {
 
 export function useInterfaceMulticall() {
   return useContract<UniswapInterfaceMulticall>(MULTICALL_ADDRESS, MulticallABI, false) as UniswapInterfaceMulticall
+}
+
+export function useInterfaceMulticall3() {
+  return useContract(MULTICALL3_ADDRESS, Multicall3ABI, false) as Contract
 }
 
 export function useV3NFTPositionManagerContract(withSignerIfPossible?: boolean): NonfungiblePositionManager | null {

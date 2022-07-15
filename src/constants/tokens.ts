@@ -2,6 +2,7 @@ import { Currency, Ether, NativeCurrency, Token, WETH9 } from '@uniswap/sdk-core
 import invariant from 'tiny-invariant'
 
 import { UNI_ADDRESS } from './addresses'
+import { CHAIN_INFO } from './chainInfo'
 import { NON_ETHER_CHAIN_IDS, SupportedChainId } from './chains'
 
 export const USDC_MAINNET = new Token(
@@ -382,7 +383,7 @@ class NonEtherNativeCurrency extends NativeCurrency {
 
   public constructor(chainId: number) {
     if (!isNonEther(chainId)) throw new Error('Not non-ether')
-    const chain = WRAPPED_NATIVE_CURRENCY[chainId]
+    const chain = CHAIN_INFO[chainId].nativeCurrency
     super(chainId, chain?.decimals ?? 18, chain?.symbol, chain?.name)
   }
 }
