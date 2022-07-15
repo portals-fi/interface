@@ -3,8 +3,10 @@ export const CHAIN_LOOKUP: { [key: number]: string } = {
   137: 'polygon',
   42161: 'arbitrum',
   10: 'optimism',
+  250: 'fantom',
+  43114: 'avalanche',
+  56: 'bsc',
 }
-
 export interface PriceResponse {
   tokens: { price: number }[]
 }

@@ -1,4 +1,7 @@
+import AavaxLogo from 'assets/images/avax-logo.webp'
+import BscLogo from 'assets/images/bnb-logo.webp'
 import ethereumLogoUrl from 'assets/images/ethereum-logo.png'
+import FantomLogo from 'assets/images/fantom-logo.webp'
 import arbitrumLogoUrl from 'assets/svg/arbitrum_logo.svg'
 import optimismLogoUrl from 'assets/svg/optimistic_ethereum.svg'
 import polygonMaticLogo from 'assets/svg/polygon-matic-logo.svg'
@@ -166,5 +169,38 @@ export const CHAIN_INFO: ChainInfoMap = {
     label: 'Polygon Mumbai',
     logoUrl: polygonMaticLogo,
     nativeCurrency: { name: 'Polygon Mumbai Matic', symbol: 'mMATIC', decimals: 18 },
+  },
+  [SupportedChainId.FANTOM]: {
+    networkType: NetworkType.L1,
+    blockWaitMsBeforeWarning: ms`10m`,
+    bridge: 'https://spooky.fi/#/bridge',
+    docs: 'https://fantom.foundation/',
+    explorer: 'https://ftmscan.com/',
+    infoLink: '#',
+    label: 'Fantom',
+    logoUrl: FantomLogo,
+    nativeCurrency: { name: 'Fantom', symbol: 'FTM', decimals: 18 },
+  },
+  [SupportedChainId.AVALANCHE]: {
+    networkType: NetworkType.L1,
+    blockWaitMsBeforeWarning: ms`10m`,
+    bridge: 'https://bridge.avax.network/',
+    docs: 'https://www.avax.network/',
+    explorer: 'https://snowtrace.io/',
+    infoLink: '#',
+    label: 'Avalanche',
+    logoUrl: AavaxLogo,
+    nativeCurrency: { name: 'Avalanche', symbol: 'AVAX', decimals: 18 },
+  },
+  [SupportedChainId.BSC]: {
+    networkType: NetworkType.L1,
+    blockWaitMsBeforeWarning: ms`10m`,
+    bridge: 'https://cbridge.celer.network/#/transfer',
+    docs: 'https://www.avax.network/',
+    explorer: 'https://bscscan.com/',
+    infoLink: '#',
+    label: 'BSC',
+    logoUrl: BscLogo,
+    nativeCurrency: { name: 'BNB', symbol: 'BNB', decimals: 18 },
   },
 }

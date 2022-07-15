@@ -158,6 +158,12 @@ const BridgeLabel = ({ chainId }: { chainId: SupportedChainId }) => {
     case SupportedChainId.POLYGON:
     case SupportedChainId.POLYGON_MUMBAI:
       return <Trans>Polygon Bridge</Trans>
+    case SupportedChainId.FANTOM:
+      return <Trans>Fantom Bridge</Trans>
+    case SupportedChainId.BSC:
+      return <Trans>BSC Bridge</Trans>
+    case SupportedChainId.AVALANCHE:
+      return <Trans>Avalanche Bridge</Trans>
     default:
       return <Trans>Bridge</Trans>
   }
@@ -173,6 +179,12 @@ const ExplorerLabel = ({ chainId }: { chainId: SupportedChainId }) => {
     case SupportedChainId.POLYGON:
     case SupportedChainId.POLYGON_MUMBAI:
       return <Trans>Polygonscan</Trans>
+    case SupportedChainId.FANTOM:
+      return <Trans>FTMScan</Trans>
+    case SupportedChainId.BSC:
+      return <Trans>BSCScan</Trans>
+    case SupportedChainId.AVALANCHE:
+      return <Trans>Snowtrace</Trans>
     default:
       return <Trans>Etherscan</Trans>
   }
@@ -261,8 +273,10 @@ const getChainNameFromId = (id: string | number) => {
 const NETWORK_SELECTOR_CHAINS = [
   SupportedChainId.MAINNET,
   SupportedChainId.POLYGON,
+  SupportedChainId.BSC,
+  SupportedChainId.AVALANCHE,
+  SupportedChainId.FANTOM,
   SupportedChainId.OPTIMISM,
-  SupportedChainId.ARBITRUM_ONE,
 ]
 
 export default function NetworkSelector() {
