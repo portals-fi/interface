@@ -105,7 +105,6 @@ export const CHAIN_INFO: ChainInfoMap = {
     label: 'Optimism',
     logoUrl: optimismLogoUrl,
     statusPage: 'https://optimism.io/status',
-    helpCenterUrl: 'https://help.uniswap.org/en/collections/3137778-uniswap-on-optimistic-ethereum-oξ',
     nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
   },
   [SupportedChainId.OPTIMISTIC_KOVAN]: {

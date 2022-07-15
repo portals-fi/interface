@@ -36,12 +36,12 @@ const RootWrapper = styled.div`
 `
 
 const SHOULD_SHOW_ALERT = {
-  [SupportedChainId.OPTIMISM]: true,
-  [SupportedChainId.OPTIMISTIC_KOVAN]: true,
-  [SupportedChainId.ARBITRUM_ONE]: true,
-  [SupportedChainId.ARBITRUM_RINKEBY]: true,
-  [SupportedChainId.POLYGON]: true,
-  [SupportedChainId.POLYGON_MUMBAI]: true,
+  [SupportedChainId.OPTIMISM]: false,
+  [SupportedChainId.OPTIMISTIC_KOVAN]: false,
+  [SupportedChainId.ARBITRUM_ONE]: false,
+  [SupportedChainId.ARBITRUM_RINKEBY]: false,
+  [SupportedChainId.POLYGON]: false,
+  [SupportedChainId.POLYGON_MUMBAI]: false,
 }
 
 type NetworkAlertChains = keyof typeof SHOULD_SHOW_ALERT
