@@ -16,6 +16,8 @@ export const MULTICALL3_ADDRESS: AddressMap = {
     SupportedChainId.ARBITRUM_ONE,
     SupportedChainId.ARBITRUM_RINKEBY,
     SupportedChainId.AVALANCHE,
+    SupportedChainId.FANTOM,
+    SupportedChainId.BSC,
   ]),
 }
 export const MULTICALL_ADDRESS: AddressMap = {
@@ -27,6 +29,7 @@ export const MULTICALL_ADDRESS: AddressMap = {
   ]),
   [SupportedChainId.ARBITRUM_ONE]: '0xadF885960B47eA2CD9B55E6DAc6B42b7Cb2806dB',
   [SupportedChainId.ARBITRUM_RINKEBY]: '0xa501c031958F579dB7676fF1CE78AD305794d579',
+  [SupportedChainId.AVALANCHE]: '0xed472F3ccD91CA418013C5C177c9bdeDEDBc09B4',
 }
 export const V2_FACTORY_ADDRESSES: AddressMap = constructSameAddressMap(V2_FACTORY_ADDRESS)
 

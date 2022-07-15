@@ -11,7 +11,7 @@ const BA_LIST = 'https://raw.githubusercontent.com/The-Blockchain-Association/se
 // const ROLL_LIST = 'https://app.tryroll.com/tokens.json'
 // const SET_LIST = 'https://raw.githubusercontent.com/SetProtocol/uniswap-tokenlist/main/set.tokenlist.json'
 // const WRAPPED_LIST = 'wrapped.tokensoft.eth'
-export const PORTALS_LIST = 'http://localhost:3000/v1/tokens/format/uniswap'
+export const PORTALS_LIST = 'https://api.portals.fi/v1/tokens/format/uniswap'
 
 export const UNSUPPORTED_LIST_URLS: string[] = [BA_LIST]
 
