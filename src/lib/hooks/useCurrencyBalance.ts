@@ -7,7 +7,7 @@ import { useMemo } from 'react'
 import { useGetBalancesQuery } from 'state/portals/slice'
 
 import { nativeOnChain } from '../../constants/tokens'
-import { useInterfaceMulticall3 } from '../../hooks/useContract'
+import { useInterfaceMulticall } from '../../hooks/useContract'
 import { isAddress } from '../../utils'
 import useAccountArguments from './portals/useAccountArguments'
 
@@ -18,7 +18,7 @@ export function useNativeCurrencyBalances(uncheckedAddresses?: (string | undefin
   [address: string]: CurrencyAmount<Currency> | undefined
 } {
   const { chainId } = useActiveWeb3React()
-  const multicallContract = useInterfaceMulticall3()
+  const multicallContract = useInterfaceMulticall()
 
   const validAddressInputs: [string][] = useMemo(
     () =>
