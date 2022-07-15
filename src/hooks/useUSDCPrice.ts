@@ -8,7 +8,14 @@ import { useMemo, useRef } from 'react'
 import { useGetPriceQuery } from 'state/portals/slice'
 
 import { SupportedChainId } from '../constants/chains'
-import { DAI_OPTIMISM, USDC_ARBITRUM, USDC_MAINNET, USDC_POLYGON } from '../constants/tokens'
+import {
+  DAI_OPTIMISM,
+  USDC_ARBITRUM,
+  USDC_AVALANCHE,
+  USDC_FANTOM,
+  USDC_MAINNET,
+  USDC_POLYGON,
+} from '../constants/tokens'
 
 // Stablecoin amounts used when calculating spot price for a given currency.
 // The amount is large enough to filter low liquidity pairs.
@@ -17,6 +24,9 @@ export const STABLECOIN_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> }
   [SupportedChainId.ARBITRUM_ONE]: CurrencyAmount.fromRawAmount(USDC_ARBITRUM, 10_000e6),
   [SupportedChainId.OPTIMISM]: CurrencyAmount.fromRawAmount(DAI_OPTIMISM, 10_000e18),
   [SupportedChainId.POLYGON]: CurrencyAmount.fromRawAmount(USDC_POLYGON, 10_000e6),
+  [SupportedChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(USDC_AVALANCHE, 10_000e6),
+  [SupportedChainId.FANTOM]: CurrencyAmount.fromRawAmount(USDC_FANTOM, 10_000e6),
+  [SupportedChainId.BSC]: CurrencyAmount.fromRawAmount(USDC_FANTOM, 10_000e6),
 }
 
 /**

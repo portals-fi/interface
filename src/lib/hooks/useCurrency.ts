@@ -97,7 +97,7 @@ export function useTokenFromMapOrNetwork(tokens: TokenMap, tokenAddress?: string
 export function useCurrencyFromMap(tokens: TokenMap, currencyId?: string | null): Currency | null | undefined {
   const nativeCurrency = useNativeCurrency()
   const { chainId, connector } = useActiveWeb3React()
-  const isNative = Boolean(nativeCurrency && currencyId?.toUpperCase() === 'ETH')
+  const isNative = Boolean(nativeCurrency && currencyId?.toUpperCase() === nativeCurrency.symbol)
   const shorthandMatchAddress = useMemo(() => {
     const chain = supportedChainId(chainId)
     return chain && currencyId ? TOKEN_SHORTHANDS[currencyId.toUpperCase()]?.[chain] : undefined
